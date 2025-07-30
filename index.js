@@ -1,33 +1,44 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
-// Pour pouvoir lire le corps des requêtes POST en JSON
+// 1) Corps JSON
 app.use(express.json());
 
-// Configuration
-const PORT = process.env.PORT || 3000;
-const ALLOWED_ORIGIN = 'https://daniel-ersen.github.io/jeu-des-trizos/';
-const SECRET_KEY = '4927-3047-4398-3947-0274';
+// 2) CORS :
+//    - Pour autoriser TOUTES les origines (très simple, mais moins sécurisé) :
+app.use(cors());
 
-// Route GET « / »
+//    // OU pour n’autoriser que quelques origines :
+//    // app.use(cors({
+//    //   origin: [
+//    //     'https://le-jeu/',
+//    //     'https://turbowarp.org',
+//    //     'https://scratch.mit.edu',
+//    //   ],
+//    //   methods: ['GET','POST','OPTIONS'],
+//    //   allowedHeaders: ['Content-Type'],
+//    // }));
+
+// 3) Routes
+
+// GET /
 app.get('/', (req, res) => {
   const origin = req.get('Origin') || '';
-  if (origin === ALLOWED_ORIGIN) {
-    return res.json({ url: 'https://serveur-stockage-jeu-default-rtdb.europe-west1.firebasedatabase.app/users' });
+  if (origin === 'https://le-jeu/') {
+    return res.json({ url: 'daniel' });
   }
   return res.status(403).json({ message: 'Accès refusé' });
 });
 
-// Route POST « / »
+// POST /
 app.post('/', (req, res) => {
-  const { cle } = req.body;
-  if (cle === SECRET_KEY) {
-    return res.json({ url: 'https://serveur-stockage-jeu-default-rtdb.europe-west1.firebasedatabase.app/users' });
+  if (req.body.cle === '4927-3047-4398-3947-0274') {
+    return res.json({ url: 'daniel' });
   }
   return res.status(403).json({ message: 'Accès refusé' });
 });
 
-// Démarrage du serveur
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// 4) Lancement
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`⚡️ sur port ${PORT}`));

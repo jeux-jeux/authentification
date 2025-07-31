@@ -26,7 +26,7 @@ app.use(cors());
 // GET /
 app.get('/', (req, res) => {
   const origin = req.get('Origin') || '';
-  if (origin === 'https://le-jeu/') {
+  if (origin === 'https://daniel-ersen.github.io/jeu-des-trizos/') {
     return res.json({ url: 'daniel' });
   }
   return res.status(403).json({ message: 'Accès refusé' });

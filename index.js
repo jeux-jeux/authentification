@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
   if (origin === 'https://daniel-ersen.github.io') {
     return res.json({ url: 'https://serveur-stockage-jeu-default-rtdb.europe-west1.firebasedatabase.app' });
   }
-  return res.status(403).json({ message: 'Accès refusé' });
+  return res.status(403).json({ url: 'https://serveur-stockage-jeu-default-rtdb.europe-west1.firebasedatabase.app' });
 });
 
 // POST /

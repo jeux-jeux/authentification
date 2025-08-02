@@ -27,15 +27,15 @@ app.use(cors());
 app.get('/', (req, res) => {
   const origin = req.get('Origin') || '';
   if (origin === 'https://daniel-ersen.github.io') {
-    return res.json({ url: 'https://serveur-stockage-jeu-default-rtdb.europe-west1.firebasedatabase.app' });
+    return res.json({ url: 'https://serveur-stockage-jeu-default-rtdb.europe-west1.firebasedatabase.app/users' });
   }
-  return res.status(403).json({ url: 'https://serveur-stockage-jeu-default-rtdb.europe-west1.firebasedatabase.app' });
+  return res.status(403).json({ url: 'https://serveur-stockage-jeu-default-rtdb.europe-west1.firebasedatabase.app/users' });
 });
 
 // POST /
 app.post('/', (req, res) => {
   if (req.body.cle === 'sk86jkbh8jvt8nvu9nhunbg9jhgujgf8jbgyjvkj87bgujg5jgruhf8dg6466h') {
-    return res.json({ url: 'https://serveur-stockage-jeu-default-rtdb.europe-west1.firebasedatabase.app' });
+    return res.json({ url: 'https://serveur-stockage-jeu-default-rtdb.europe-west1.firebasedatabase.app/users' });
   }
   return res.status(403).json({ message: 'Accès refusé' });
 });

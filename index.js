@@ -26,7 +26,7 @@ app.use(cors());
 // GET /
 app.get('/', (req, res) => {
   const origin = req.get('Origin') || '';
-  if (origin === 'https://daniel-ersen.github.io') {
+  if (origin === 'https://jeux-jeux.github.io') {
     return res.json({ url: 'https://serveur-stockage-jeu-default-rtdb.europe-west1.firebasedatabase.app/users' });
   }
   return res.status(403).json({ url: 'https://serveur-stockage-jeu-default-rtdb.europe-west1.firebasedatabase.app/users' });

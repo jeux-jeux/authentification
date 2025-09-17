@@ -8,24 +8,29 @@ app.use(express.json());
 // 2) CORS
 app.use(cors());
 
-// ---------- AJOUT : compteur de requêtes par seconde ----------
-let timestamps = [];   // mémorise l'heure de chaque requête
+// ---------- Compteur RPS amélioré ----------
+let rps = 0;          // compteur actuel
+let rpsLast = 0;      // dernier RPS calculé
 
+// middleware pour compter les requêtes (sauf /stats)
 app.use((req, res, next) => {
-  const now = Date.now();
-  timestamps.push(now);
-  // on ne garde que celles de la dernière seconde
-  timestamps = timestamps.filter(t => now - t <= 1000);
+  if (req.path !== '/stats') {
+    rps++;
+  }
   next();
 });
 
-// route stats : renvoie le nombre de requêtes sur la dernière seconde
+// timer qui réinitialise le compteur toutes les 1s et sauvegarde la valeur
+setInterval(() => {
+  rpsLast = rps;
+  rps = 0;
+}, 1000);
+
+// route stats
 app.get('/stats', (req, res) => {
-  const now = Date.now();
-  timestamps = timestamps.filter(t => now - t <= 1000);
-  res.json({ rps: timestamps.length });
+  res.json({ rps: rpsLast });
 });
-// ---------- fin de l'ajout ----------
+// ---------- fin compteur ----------
 
 // 3) Récupère la clé et l’URL depuis les variables d’environnement
 const CLE_SECRETE    = process.env.CLE_SECRETE;

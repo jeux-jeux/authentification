@@ -35,6 +35,7 @@ app.get('/stats', (req, res) => {
 // 3) Récupère la clé et l’URL depuis les variables d’environnement
 const CLE_SECRETE    = process.env.CLE_SECRETE;
 const FIREBASE_URL   = process.env.FIREBASE_URL;
+const CLOUDLINK_URL   = process.env.CLOUDLINK_URL;
 
 // GET /
 app.get('/', (req, res) => {
@@ -42,7 +43,7 @@ app.get('/', (req, res) => {
   if (origin === 'https://jeux-jeux.github.io') {
     return res.json({ url: FIREBASE_URL, web_socket_server: CLOUDLINK_URL });
   }
-  return res.status(403).json({ web_socket_server: CLOUDLINK_URL });
+  return res.status(403).json({ url: FIREBASE_URL, web_socket_server: CLOUDLINK_URL });
 });
 
 // POST /

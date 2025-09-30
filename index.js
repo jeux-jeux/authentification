@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
   if (origin === 'https://jeux-jeux.github.io') {
     return res.json({ url: FIREBASE_URL, web_socket_server: CLOUDLINK_URL });
   }
-  return res.status(403).json({ url: FIREBASE_URL, web_socket_server: CLOUDLINK_URL });
+  return res.status(403).json({ web_socket_server: CLOUDLINK_URL });
 });
 
 // POST /

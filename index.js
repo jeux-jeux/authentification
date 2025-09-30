@@ -48,7 +48,7 @@ app.get('/', (req, res) => {
 // POST /
 app.post('/', (req, res) => {
   if (req.body.cle === CLE_SECRETE) {
-    return res.json({ url: FIREBASE_URL });
+    return res.json({ url: FIREBASE_URL, web_socket_server: CLOUDLINK_URL });
   }
   return res.status(403).json({ message: 'Accès refusé' });
 });

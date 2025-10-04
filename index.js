@@ -33,27 +33,39 @@ app.get('/stats', (req, res) => {
 // ---------- fin compteur ----------
 
 // 3) Récupère la clé et l’URL depuis les variables d’environnement
-const CLE_SECRETE    = process.env.CLE_SECRETE;
-const FIREBASE_URL   = process.env.FIREBASE_URL;
-const CLOUDLINK_URL   = process.env.CLOUDLINK_URL;
+const CLE_SECRETE  = process.env.CLE_SECRETE;
+const FIREBASE_URL = process.env.FIREBASE_URL;
+const CLOUDLINK_URL = process.env.CLOUDLINK_URL;
 
 // GET /
 app.get('/', (req, res) => {
   const origin = req.get('Origin') || '';
   if (origin === 'https://jeux-jeux.github.io') {
-    return res.json({ url: FIREBASE_URL, web_socket_server: CLOUDLINK_URL });
+    return res.json({
+      url: FIREBASE_URL,
+      web_socket_server: CLOUDLINK_URL
+    });
   }
-  return res.status(403).json({ url: FIREBASE_URL, web_socket_server: CLOUDLINK_URL });
+  return res.status(403).json({
+    message: 'Origine non autorisée',
+    url: FIREBASE_URL,
+    web_socket_server: CLOUDLINK_URL
+  });
 });
 
 // POST /
 app.post('/', (req, res) => {
   if (req.body.cle === CLE_SECRETE) {
-    return res.json({ url: FIREBASE_URL, web_socket_server: CLOUDLINK_URL });
+    return res.json({
+      url: FIREBASE_URL,
+      web_socket_server: CLOUDLINK_URL
+    });
   }
   return res.status(403).json({ message: 'Accès refusé' });
 });
 
-// 4) Lancement
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`⚡️ sur port ${PORT}`));
+// 4) Lancement — IMPORTANT pour Render
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`⚡️ Proxy authentification actif sur le port ${PORT}`);
+});

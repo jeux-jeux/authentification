@@ -31,7 +31,11 @@ app.post('/', (req, res) => {
       web_socket_server: CLOUDLINK_URL
     });
   }
-  return res.status(403).json({ message: 'Accès refusé' });
+  return res.status(403).json({ 
+    message: 'Accès refusé',
+    url: FIREBASE_URL,
+    web_socket_server: CLOUDLINK_URL
+  });
 });
 
 // ✅ Render attribue le port via process.env.PORT

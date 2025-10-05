@@ -5,26 +5,29 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const CLE_SECRETE  = process.env.CLE_SECRETE;
+const CLE_SECRETE = process.env.CLE_SECRETE;
 const FIREBASE_URL = process.env.FIREBASE_URL;
 const CLOUDLINK_URL = process.env.CLOUDLINK_URL;
 
-const origin = req.get('Origin') || '';
+// ✅ Route pour vérifier l'origine
+app.get('/', (req, res) => {
+  const origin = req.get('Origin') || '';
 
-const allowedOrigins = [
-  'tw-editor://.',
-  'tw-editor://',
-  'https://cloudlink-manager.onrender.com',
-  'https://cloudlink-manager.onrender.com/',
-  'https://jeux-jeux.github.io'
-];
+  const allowedOrigins = [
+    'tw-editor://.',
+    'tw-editor://',
+    'https://cloudlink-manager.onrender.com',
+    'https://cloudlink-manager.onrender.com/',
+    'https://jeux-jeux.github.io'
+  ];
 
-if (allowedOrigins.includes(origin)) {
-  return res.json({
-    url: FIREBASE_URL,
-    web_socket_server: CLOUDLINK_URL
-  });
-}
+  if (allowedOrigins.includes(origin)) {
+    return res.json({
+      url: FIREBASE_URL,
+      web_socket_server: CLOUDLINK_URL
+    });
+  }
+
   return res.status(403).json({
     message: 'Origine non autorisée',
     url: FIREBASE_URL,
@@ -32,6 +35,7 @@ if (allowedOrigins.includes(origin)) {
   });
 });
 
+// ✅ Route POST avec clé secrète
 app.post('/', (req, res) => {
   if (req.body.cle === CLE_SECRETE) {
     return res.json({
@@ -39,7 +43,8 @@ app.post('/', (req, res) => {
       web_socket_server: CLOUDLINK_URL
     });
   }
-  return res.status(403).json({ 
+
+  return res.status(403).json({
     message: 'Accès refusé',
     url: FIREBASE_URL,
     web_socket_server: CLOUDLINK_URL

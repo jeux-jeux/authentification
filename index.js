@@ -9,7 +9,7 @@ const CLE_SECRETE = process.env.CLE_SECRETE;
 const FIREBASE_URL = process.env.FIREBASE_URL;
 const CLOUDLINK_URL = process.env.CLOUDLINK_URL;
 
-// ✅ Route pour vérifier l'origine
+// ✅ Route GET avec contrôle des origines
 app.get('/', (req, res) => {
   const origin = req.get('Origin') || '';
 
@@ -49,6 +49,11 @@ app.post('/', (req, res) => {
     url: FIREBASE_URL,
     web_socket_server: CLOUDLINK_URL
   });
+});
+
+// ✅ Route par défaut pour toutes les routes inconnues
+app.use((req, res) => {
+  res.status(404).json({ message: 'Route inconnue' });
 });
 
 // ✅ Render attribue le port via process.env.PORT

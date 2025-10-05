@@ -9,14 +9,22 @@ const CLE_SECRETE  = process.env.CLE_SECRETE;
 const FIREBASE_URL = process.env.FIREBASE_URL;
 const CLOUDLINK_URL = process.env.CLOUDLINK_URL;
 
-app.get('/', (req, res) => {
-  const origin = req.get('Origin') || '';
-  if (origin === 'https://jeux-jeux.github.io') {
-    return res.json({
-      url: FIREBASE_URL,
-      web_socket_server: CLOUDLINK_URL
-    });
-  }
+const origin = req.get('Origin') || '';
+
+const allowedOrigins = [
+  'tw-editor://.',
+  'tw-editor://',
+  'https://cloudlink-manager.onrender.com',
+  'https://cloudlink-manager.onrender.com/',
+  'https://jeux-jeux.github.io'
+];
+
+if (allowedOrigins.includes(origin)) {
+  return res.json({
+    url: FIREBASE_URL,
+    web_socket_server: CLOUDLINK_URL
+  });
+}
   return res.status(403).json({
     message: 'Origine non autorisée',
     url: FIREBASE_URL,

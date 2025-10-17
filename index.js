@@ -54,7 +54,7 @@ app.post('/', (req, res) => {
 
 // ✅ Route par défaut pour toutes les routes inconnues
 app.use((req, res) => {
-  res.status(404).json({ message: 'Accès refusé');
+  res.status(404).json({ message: 'Accès refusé'});
 });
 
 // ✅ Render attribue le port via process.env.PORT

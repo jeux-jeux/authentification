@@ -5,6 +5,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const ALLOWED_TO_PRINCIPAL = process.env.ALLOWED_TO_PRINCIPAL;
+const ALLOWED_TO_STOCKAGE = process.env.ALLOWED_TO_STOCKAGE;
+const ALLOWED_TO_WEBSOCKET = process.env.ALLOWED_TO_WEBSOCKET;
 const CLE_SECRETE = process.env.CLE_SECRETE;
 const FIREBASE_URL = process.env.FIREBASE_URL;
 const CLOUDLINK_URL = process.env.CLOUDLINK_URL;
@@ -24,14 +27,13 @@ app.get('/', (req, res) => {
   if (allowedOrigins.includes(origin)) {
     return res.json({
       url: FIREBASE_URL,
-      web_socket_server: CLOUDLINK_URL
+      web_socket_server: CLOUDLINK_URL,
+      access_to_cloudlink: ALLOWED_TO_WEBSOCKET
     });
   }
 
   return res.status(403).json({
-    message: 'Origine non autorisée',
-    url: FIREBASE_URL,
-    web_socket_server: CLOUDLINK_URL
+    message: 'Accès refusé'
   });
 });
 
@@ -40,20 +42,19 @@ app.post('/', (req, res) => {
   if (req.body.cle === CLE_SECRETE) {
     return res.json({
       url: FIREBASE_URL,
-      web_socket_server: CLOUDLINK_URL
+      web_socket_server: CLOUDLINK_URL,
+      access_to_cloudlink: ALLOWED_TO_WEBSOCKET
     });
   }
 
   return res.status(403).json({
     message: 'Accès refusé',
-    url: FIREBASE_URL,
-    web_socket_server: CLOUDLINK_URL
   });
 });
 
 // ✅ Route par défaut pour toutes les routes inconnues
 app.use((req, res) => {
-  res.status(404).json({ message: 'Route inconnue' });
+  res.status(404).json({ message: 'Accès refusé');
 });
 
 // ✅ Render attribue le port via process.env.PORT

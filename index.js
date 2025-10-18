@@ -5,6 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const ALLOWED_TO_WEBSOCKET = process.env.ALLOWED_TO_WEBSOCKET;
 const ALLOWED_TO_PRINCIPAL = process.env.ALLOWED_TO_PRINCIPAL;
 const ALLOWED_TO_STOCKAGE = process.env.ALLOWED_TO_STOCKAGE;
 const CLE_WBS_MNG = process.env.CLE_WBS_MNG;
@@ -23,8 +24,6 @@ app.get('/', (req, res) => {
   if (allowedOrigins.includes(origin)) {
     return res.json({
       url: FIREBASE_URL,
-      web_socket_server: CLOUDLINK_URL,
-      access_to_cloudlink: ALLOWED_TO_WEBSOCKET
     });
   }
 
@@ -39,13 +38,26 @@ app.post('/', (req, res) => {
     return res.json({
       url: FIREBASE_URL,
       web_socket_server: CLOUDLINK_URL,
-      access_to_cloudlink: ALLOWED_TO_WEBSOCKET
+      origine_proxy: ALLOWED_TO_PRINCIPAL,
+      origine_stockage: ALLOWED_TO_STOCKAGE
+    });
+  } else if (req.body.cle === CLE_WBS_MNG) { // <-- placeholder 1 : modifie la condition/action ici
+    return res.json({
+      allowed_origin: ALLOWED_TO_WEBSOCKET
+    });
+  } else if (req.body.cle === CLE_WBS_MNG) { // <-- placeholder 2 : modifie la condition/action ici
+    return res.json({
+      web_socket_server: CLOUDLINK_URL
+    });
+  } else if (req.body.cle === CLE_INT_PROXY) { // <-- placeholder 3 : modifie la condition/action ici
+    return res.json({
+      origine_stockage: ALLOWED_TO_STOCKAGE
+    });
+  } else {
+    return res.status(403).json({
+      message: 'Accès refusé',
     });
   }
-
-  return res.status(403).json({
-    message: 'Accès refusé',
-  });
 });
 
 // ✅ Route par défaut pour toutes les routes inconnues

@@ -9,21 +9,16 @@ const ALLOWED_TO_PRINCIPAL = process.env.ALLOWED_TO_PRINCIPAL;
 const ALLOWED_TO_STOCKAGE = process.env.ALLOWED_TO_STOCKAGE;
 const CLE_WBS_MNG = process.env.CLE_WBS_MNG;
 const CLE_WBS_SRV = process.env.CLE_WBS_SRV;
+const CLE_INT_PROXY = process.env.CLE_INT_PROXY;
 const CLE_IPHONE = process.env.CLE_IPHONE;
-const FIREBASE_URL = process.env.FIREBASE_URL;
-const CLOUDLINK_URL = process.env.CLOUDLINK_URL;
+const FIREBASE_URL = process.env.URL_FIREBASE;
+const CLOUDLINK_URL = process.env.URL_CLOUDLINK;
 
 // ✅ Route GET avec contrôle des origines
 app.get('/', (req, res) => {
   const origin = req.get('Origin') || '';
 
-  const allowedOrigins = [
-    'tw-editor://.',
-    'tw-editor://',
-    'https://cloudlink-manager.onrender.com',
-    'https://cloudlink-manager.onrender.com/',
-    'https://jeux-jeux.github.io'
-  ];
+  const allowedOrigins = ALLOWED_TO_PRINCIPAL;
 
   if (allowedOrigins.includes(origin)) {
     return res.json({

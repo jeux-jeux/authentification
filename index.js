@@ -7,8 +7,9 @@ app.use(cors());
 
 const ALLOWED_TO_PRINCIPAL = process.env.ALLOWED_TO_PRINCIPAL;
 const ALLOWED_TO_STOCKAGE = process.env.ALLOWED_TO_STOCKAGE;
-const ALLOWED_TO_WEBSOCKET = process.env.ALLOWED_TO_WEBSOCKET;
-const CLE_SECRETE = process.env.CLE_SECRETE;
+const CLE_WBS_MNG = process.env.CLE_WBS_MNG;
+const CLE_WBS_SRV = process.env.CLE_WBS_SRV;
+const CLE_IPHONE = process.env.CLE_IPHONE;
 const FIREBASE_URL = process.env.FIREBASE_URL;
 const CLOUDLINK_URL = process.env.CLOUDLINK_URL;
 
@@ -39,7 +40,7 @@ app.get('/', (req, res) => {
 
 // ✅ Route POST avec clé secrète
 app.post('/', (req, res) => {
-  if (req.body.cle === CLE_SECRETE) {
+  if (req.body.cle === CLE_IPHONE) {
     return res.json({
       url: FIREBASE_URL,
       web_socket_server: CLOUDLINK_URL,

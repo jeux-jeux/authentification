@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   // Si aucune origine n'est fournie, on refuse tout de suite
   if (!origin) {
     return res.status(403).json({
-      message: 'Accès refusé (aucune origine fournie)'
+      message: 'Accès refusé'
     });
   }
 

@@ -41,7 +41,7 @@ app.post('/', (req, res) => {
       origine_proxy: ALLOWED_TO_PRINCIPAL,
       origine_stockage: ALLOWED_TO_STOCKAGE
     });
-  } else if (req.body.cle === CLE_WBS_MNG) { // <-- placeholder 1 : modifie la condition/action ici
+  } else if (req.body.cle === CLE_WBS_SRV) { // <-- placeholder 1 : modifie la condition/action ici
     return res.json({
       allowed_origin: ALLOWED_TO_WEBSOCKET
     });

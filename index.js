@@ -17,9 +17,14 @@ const CLOUDLINK_URL = process.env.URL_CLOUDLINK;
 
 // ✅ Route GET avec contrôle des origines
 app.get('/', (req, res) => {
-  const origin = req.get('Origin') || '';
-
+  const origin = req.get('Origin');
   const allowedOrigins = ALLOWED_TO_PRINCIPAL;
+  // Si aucune origine n'est fournie, on refuse tout de suite
+  if (!origin) {
+    return res.status(403).json({
+      message: 'Accès refusé (aucune origine fournie)'
+    });
+  }
 
   if (allowedOrigins.includes(origin)) {
     return res.json({
@@ -31,6 +36,7 @@ app.get('/', (req, res) => {
     message: 'Accès refusé'
   });
 });
+
 
 // ✅ Route POST avec clé secrète
 app.post('/', (req, res) => {

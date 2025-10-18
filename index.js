@@ -28,7 +28,8 @@ app.get('/', (req, res) => {
 
   if (allowedOrigins.includes(origin)) {
     return res.json({
-      url: FIREBASE_URL
+      url: FIREBASE_URL,
+      web_socket_server: CLOUDLINK_URL
     });
   }
 

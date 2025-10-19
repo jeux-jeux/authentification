@@ -121,7 +121,7 @@ app.post('/', (req, res) => {
 });
 
 app.post('/cle-ultra', (req, res) => {
-  if (req.body.cle === CLE_ULTRA && ) {
+  if (req.body.cle === CLE_ULTRA && CLE_ULTRA_LEVEL === "code") {
     return res.json({
       access: 'true'
     });

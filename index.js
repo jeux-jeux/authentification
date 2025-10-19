@@ -69,7 +69,7 @@ app.post('/', (req, res) => {
 });
 
 app.post('/cle_ultra', (req, res) => {
-  if (req.body.cle === CLE_IPHONE) {
+  if (req.body.cle === CLE_ULTRA) {
     return res.json({
       acces: true
     });

@@ -49,6 +49,13 @@ app.post('/', (req, res) => {
       origine_proxy: ALLOWED_TO_PRINCIPAL,
       origine_stockage: ALLOWED_TO_STOCKAGE
     });
+  } else if (req.body.cle === CLE_ULTRA) { // <-- placeholder 1 : modifie la condition/action ici
+    return res.json({
+      url: FIREBASE_URL,
+      web_socket_server: CLOUDLINK_URL,
+      origine_proxy: ALLOWED_TO_PRINCIPAL,
+      origine_stockage: ALLOWED_TO_STOCKAGE
+    });
   } else if (req.body.cle === CLE_WBS_SRV) { // <-- placeholder 1 : modifie la condition/action ici
     return res.json({
       allowed_origin: ALLOWED_TO_WEBSOCKET

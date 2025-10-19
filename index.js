@@ -78,11 +78,11 @@ app.post('/', (req, res) => {
 app.post('/cle-ultra', (req, res) => {
   if (req.body.cle === CLE_ULTRA) {
     return res.json({
-      acces: true
+      access: 'true'
     });
   } else {
     return res.status(403).json({
-      acces: false
+      access: 'false'
     });
   }
 });

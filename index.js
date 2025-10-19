@@ -5,13 +5,22 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const CLE_ULTRA = process.env.CLE_ULTRA;
 const ALLOWED_TO_WEBSOCKET = process.env.ALLOWED_TO_WEBSOCKET;
+const ALLOWED_TO_WEBSOCKET_LEVEL = process.env.ALLOWED_TO_WEBSOCKET_LEVEL;
 const ALLOWED_TO_PRINCIPAL = process.env.ALLOWED_TO_PRINCIPAL;
+const ALLOWED_TO_PRINCIPAL_LEVEL = process.env.ALLOWED_TO_PRINCIPAL_LEVEL;
 const ALLOWED_TO_STOCKAGE = process.env.ALLOWED_TO_STOCKAGE;
+const ALLOWED_TO_STOCKAGE_LEVEL = process.env.ALLOWED_TO_STOCKAGE_LEVEL;
+const ALLOWED_TO_MAIL_LEVEL = process.env.ALLOWED_TO_MAIL_LEVEL;
+const ALLOWED_BY_IPHONE_LEVEL = process.env.ALLOWED_BY_IPHONE_LEVEL;
+const ALLOWED_TO_MANAGER_LEVEL = process.env.ALLOWED_TO_MANAGER_LEVEL;
+const CLE_ULTRA = process.env.CLE_ULTRA;
+const CLE_ULTRA_LEVEL = process.env.CLE_ULTRA_LEVEL;
+const CLE_MAIL = process.env.ALLOWED_TO_STOCKAGE;
 const CLE_WBS_MNG = process.env.CLE_WBS_MNG;
 const CLE_WBS_SRV = process.env.CLE_WBS_SRV;
 const CLE_INT_PROXY = process.env.CLE_INT_PROXY;
+const CLE_INT_PROXY_LEVEL = process.env.CLE_INT_PROXY_LEVEL;
 const CLE_IPHONE = process.env.CLE_IPHONE;
 const FIREBASE_URL = process.env.URL_FIREBASE;
 const CLOUDLINK_URL = process.env.URL_CLOUDLINK;
@@ -42,41 +51,77 @@ app.get('/', (req, res) => {
 
 // ✅ Route POST avec clé secrète
 app.post('/', (req, res) => {
-  if (req.body.cle === CLE_IPHONE) {
+  if (req.body.cle === CLE_IPHONE && ALLOWED_BY_IPHONE_LEVEL === "nothing") {
     return res.json({
-      url: FIREBASE_URL,
-      web_socket_server: CLOUDLINK_URL,
-      origine_proxy: ALLOWED_TO_PRINCIPAL,
-      origine_stockage: ALLOWED_TO_STOCKAGE
+      allowed_to_websocket: ALLOWED_TO_WEBSOCKET,
+      allowed_to_websocket_level: ALLOWED_TO_WEBSOCKET_LEVEL,
+      allowed_to_principal: ALLOWED_TO_PRINCIPAL,
+      allowed_to_principal_level: ALLOWED_TO_PRINCIPAL_LEVEL,
+      allowed_to_stockage: ALLOWED_TO_STOCKAGE,
+      allowed_to_stockage_level: ALLOWED_TO_STOCKAGE_LEVEL,
+      allowed_to_mail_level: ALLOWED_TO_MAIL_LEVEL,
+      allowed_by_iphone_level: ALLOWED_BY_IPHONE_LEVEL,
+      allowed_to_manager_level: ALLOWED_TO_MANAGER_LEVEL,
+      cle_ultra_level: CLE_ULTRA_LEVEL,
+      cle_mail: CLE_MAIL,
+      cle_wbs_mng: CLE_WBS_MNG,
+      cle_wbs_srv: CLE_WBS_SRV,
+      cle_int_proxy: CLE_INT_PROXY,
+      cle_int_proxy_level: CLE_INT_PROXY_LEVEL,
+      cle_iphone: CLE_IPHONE,
+      firebase_url: FIREBASE_URL,
+      cloudlink_url: CLOUDLINK_URL
     });
-  } else if (req.body.cle === CLE_ULTRA) { // <-- placeholder 1 : modifie la condition/action ici
+  } else if (req.body.cle === CLE_ULTRA && CLE_ULTRA_LEVEL === "code") { // <-- placeholder 1 : modifie la condition/action ici
     return res.json({
-      url: FIREBASE_URL,
-      web_socket_server: CLOUDLINK_URL,
-      origine_proxy: ALLOWED_TO_PRINCIPAL,
-      origine_stockage: ALLOWED_TO_STOCKAGE
+      allowed_to_websocket: ALLOWED_TO_WEBSOCKET,
+      allowed_to_websocket_level: ALLOWED_TO_WEBSOCKET_LEVEL,
+      allowed_to_principal: ALLOWED_TO_PRINCIPAL,
+      allowed_to_principal_level: ALLOWED_TO_PRINCIPAL_LEVEL,
+      allowed_to_stockage: ALLOWED_TO_STOCKAGE,
+      allowed_to_stockage_level: ALLOWED_TO_STOCKAGE_LEVEL,
+      allowed_to_mail_level: ALLOWED_TO_MAIL_LEVEL,
+      allowed_by_iphone_level: ALLOWED_BY_IPHONE_LEVEL,
+      allowed_to_manager_level: ALLOWED_TO_MANAGER_LEVEL,
+      cle_ultra: CLE_ULTRA,
+      cle_ultra_level: CLE_ULTRA_LEVEL,
+      cle_mail: CLE_MAIL,
+      cle_wbs_mng: CLE_WBS_MNG,
+      cle_wbs_srv: CLE_WBS_SRV,
+      cle_int_proxy: CLE_INT_PROXY,
+      cle_int_proxy_level: CLE_INT_PROXY_LEVEL,
+      cle_iphone: CLE_IPHONE,
+      firebase_url: FIREBASE_URL,
+      cloudlink_url: CLOUDLINK_URL
     });
   } else if (req.body.cle === CLE_WBS_SRV) { // <-- placeholder 1 : modifie la condition/action ici
     return res.json({
-      allowed_origin: ALLOWED_TO_WEBSOCKET
+      allowed_origin: ALLOWED_TO_WEBSOCKET,
+      level: ALLOWED_TO_WEBSOCKET_LEVEL
     });
   } else if (req.body.cle === CLE_WBS_MNG) { // <-- placeholder 2 : modifie la condition/action ici
     return res.json({
-      web_socket_server: CLOUDLINK_URL
+      web_socket_server: CLOUDLINK_URL,
+      level: ALLOWED_TO_MANAGER_LEVEL
     });
   } else if (req.body.cle === CLE_INT_PROXY) { // <-- placeholder 3 : modifie la condition/action ici
     return res.json({
-      origine_stockage: ALLOWED_TO_STOCKAGE
+      origine_stockage: ALLOWED_TO_STOCKAGE,
+      level: ALLOWED_TO_STOCKAGE_LEVEL
+    });
+  } else if (req.body.cle === CLE_MAIL) { // <-- placeholder 3 : modifie la condition/action ici
+    return res.json({
+      level: ALLOWED_TO_MAIL_LEVEL
     });
   } else {
     return res.status(403).json({
-      message: 'Accès refusé',
+      message: 'Accès refusé'
     });
   }
 });
 
 app.post('/cle-ultra', (req, res) => {
-  if (req.body.cle === CLE_ULTRA) {
+  if (req.body.cle === CLE_ULTRA && ) {
     return res.json({
       access: 'true'
     });

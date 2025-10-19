@@ -5,6 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const CLE_ULTRA = process.env.CLE_ULTRA;
 const ALLOWED_TO_WEBSOCKET = process.env.ALLOWED_TO_WEBSOCKET;
 const ALLOWED_TO_PRINCIPAL = process.env.ALLOWED_TO_PRINCIPAL;
 const ALLOWED_TO_STOCKAGE = process.env.ALLOWED_TO_STOCKAGE;
@@ -63,6 +64,18 @@ app.post('/', (req, res) => {
   } else {
     return res.status(403).json({
       message: 'Accès refusé',
+    });
+  }
+});
+
+app.post('/cle_ultra', (req, res) => {
+  if (req.body.cle === CLE_IPHONE) {
+    return res.json({
+      acces: true
+    });
+  } else {
+    return res.status(403).json({
+      acces: false
     });
   }
 });

@@ -19,6 +19,8 @@ const CLE_ULTRA_LEVEL = process.env.CLE_ULTRA_LEVEL;
 const CLE_MAIL = process.env.ALLOWED_TO_STOCKAGE;
 const CLE_WBS_MNG = process.env.CLE_WBS_MNG;
 const CLE_WBS_SRV = process.env.CLE_WBS_SRV;
+const CLE_WBS_SRV_CONNECT = process.env.CLE_WBS_SRV_CONNECT;
+const CLE_WBS_SRV_CONNECT_LEVEL = process.env.CLE_WBS_SRV_CONNECT_LEVEL;
 const CLE_INT_PROXY = process.env.CLE_INT_PROXY;
 const CLE_INT_PROXY_LEVEL = process.env.CLE_INT_PROXY_LEVEL;
 const CLE_IPHONE = process.env.CLE_IPHONE;
@@ -51,7 +53,7 @@ app.get('/', (req, res) => {
 
 // ✅ Route POST avec clé secrète
 app.post('/', (req, res) => {
-  if (req.body.cle === CLE_IPHONE && ALLOWED_BY_IPHONE_LEVEL === "nothing") {
+  if (req.body.cle === CLE_IPHONE && ALLOWED_BY_IPHONE_LEVEL === "code") {
     return res.json({
       allowed_to_websocket: ALLOWED_TO_WEBSOCKET,
       allowed_to_websocket_level: ALLOWED_TO_WEBSOCKET_LEVEL,
@@ -66,6 +68,8 @@ app.post('/', (req, res) => {
       cle_mail: CLE_MAIL,
       cle_wbs_mng: CLE_WBS_MNG,
       cle_wbs_srv: CLE_WBS_SRV,
+      cle_wbs_srv_connect: CLE_WBS_SRV_CONNECT,
+      cle_wbs_srv_connect_level: CLE_WBS_SRV_CONNECT_LEVEL,
       cle_int_proxy: CLE_INT_PROXY,
       cle_int_proxy_level: CLE_INT_PROXY_LEVEL,
       cle_iphone: CLE_IPHONE,
@@ -88,6 +92,8 @@ app.post('/', (req, res) => {
       cle_mail: CLE_MAIL,
       cle_wbs_mng: CLE_WBS_MNG,
       cle_wbs_srv: CLE_WBS_SRV,
+      cle_wbs_srv_connect: CLE_WBS_SRV_CONNECT,
+      cle_wbs_srv_connect_level: CLE_WBS_SRV_CONNECT_LEVEL,
       cle_int_proxy: CLE_INT_PROXY,
       cle_int_proxy_level: CLE_INT_PROXY_LEVEL,
       cle_iphone: CLE_IPHONE,
@@ -97,7 +103,9 @@ app.post('/', (req, res) => {
   } else if (req.body.cle === CLE_WBS_SRV) { // <-- placeholder 1 : modifie la condition/action ici
     return res.json({
       allowed_origin: ALLOWED_TO_WEBSOCKET,
-      level: ALLOWED_TO_WEBSOCKET_LEVEL
+      level: ALLOWED_TO_WEBSOCKET_LEVEL,
+      cle: CLE_WBS_SRV_CONNECT,
+      cle_level: CLE_WBS_SRV_CONNECT_LEVEL,
     });
   } else if (req.body.cle === CLE_WBS_MNG) { // <-- placeholder 2 : modifie la condition/action ici
     return res.json({

@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
   const allowedOrigins = ALLOWED_TO_PRINCIPAL;
   // Si aucune origine n'est fournie, on refuse tout de suite
   if (!origin) {
-    return res.status(403).json({
+    return res.json({
       message: 'Accès refusé'
     });
   }
@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
     });
   }
 
-  return res.status(403).json({
+  return res.json({
     message: 'Accès refusé'
   });
 });
@@ -114,7 +114,7 @@ app.post('/', (req, res) => {
       level: ALLOWED_TO_MAIL_LEVEL
     });
   } else {
-    return res.status(403).json({
+    return res.json({
       message: 'Accès refusé'
     });
   }
@@ -126,7 +126,7 @@ app.post('/cle-ultra', (req, res) => {
       access: 'true'
     });
   } else {
-    return res.status(403).json({
+    return res.json({
       access: 'false'
     });
   }
@@ -134,7 +134,7 @@ app.post('/cle-ultra', (req, res) => {
 
 // ✅ Route par défaut pour toutes les routes inconnues
 app.use((req, res) => {
-  res.status(404).json({ message: 'Accès refusé'});
+  res.json({ message: 'Accès refusé'});
 });
 
 // ✅ Render attribue le port via process.env.PORT

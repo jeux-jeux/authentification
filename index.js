@@ -24,6 +24,7 @@ const CLE_WBS_SRV_CONNECT_LEVEL = process.env.CLE_WBS_SRV_CONNECT_LEVEL;
 const CLE_INT_PROXY = process.env.CLE_INT_PROXY;
 const CLE_INT_PROXY_LEVEL = process.env.CLE_INT_PROXY_LEVEL;
 const CLE_IPHONE = process.env.CLE_IPHONE;
+const CLE_IPHONE_LEVEL = process.env.CLE_IPHONE_LEVEL;
 const FIREBASE_URL = process.env.URL_FIREBASE;
 const CLOUDLINK_URL = process.env.URL_CLOUDLINK;
 
@@ -73,6 +74,7 @@ app.post('/', (req, res) => {
       cle_int_proxy: CLE_INT_PROXY,
       cle_int_proxy_level: CLE_INT_PROXY_LEVEL,
       cle_iphone: CLE_IPHONE,
+      cle_iphone_level: CLE_IPHONE_LEVEL,
       firebase_url: FIREBASE_URL,
       cloudlink_url: CLOUDLINK_URL
     });
@@ -97,6 +99,7 @@ app.post('/', (req, res) => {
       cle_int_proxy: CLE_INT_PROXY,
       cle_int_proxy_level: CLE_INT_PROXY_LEVEL,
       cle_iphone: CLE_IPHONE,
+      cle_iphone_level: CLE_IPHONE_LEVEL,
       firebase_url: FIREBASE_URL,
       cloudlink_url: CLOUDLINK_URL
     });
@@ -140,7 +143,7 @@ app.post('/cle-ultra', (req, res) => {
 });
 
 app.post('/cle-iphone', (req, res) => {
-  if (req.body.cle === CLE_IPHONE) {
+  if (req.body.cle === CLE_IPHONE && CLE_IPHONE_LEVEL === "code") {
     return res.json({
       access: 'true'
     });

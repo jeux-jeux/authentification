@@ -104,8 +104,6 @@ app.post('/', (req, res) => {
     return res.json({
       allowed_origin: ALLOWED_TO_WEBSOCKET,
       level: ALLOWED_TO_WEBSOCKET_LEVEL,
-      cle: CLE_WBS_SRV_CONNECT,
-      cle_level: CLE_WBS_SRV_CONNECT_LEVEL,
     });
   } else if (req.body.cle === CLE_WBS_MNG) { // <-- placeholder 2 : modifie la condition/action ici
     return res.json({
@@ -132,6 +130,18 @@ app.post('/cle-ultra', (req, res) => {
   if (req.body.cle === CLE_ULTRA && CLE_ULTRA_LEVEL === "code") {
     return res.json({
       access: 'true'
+    });
+  } else {
+    return res.json({
+      access: 'false'
+    });
+  }
+});
+
+app.post('/cle-wbs', (req, res) => {
+  if (req.body.cle === CLE_WBS_SRV_CONNECT && CLE_WBS_SRV_CONNECT_LEVEL === "code") {
+    return res.json({
+      access: 'False'
     });
   } else {
     return res.json({

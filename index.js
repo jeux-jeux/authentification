@@ -12,7 +12,6 @@ const ALLOWED_TO_PRINCIPAL_LEVEL = process.env.ALLOWED_TO_PRINCIPAL_LEVEL;
 const ALLOWED_TO_STOCKAGE = process.env.ALLOWED_TO_STOCKAGE;
 const ALLOWED_TO_STOCKAGE_LEVEL = process.env.ALLOWED_TO_STOCKAGE_LEVEL;
 const ALLOWED_TO_MAIL_LEVEL = process.env.ALLOWED_TO_MAIL_LEVEL;
-const ALLOWED_BY_IPHONE_LEVEL = process.env.ALLOWED_BY_IPHONE_LEVEL;
 const ALLOWED_TO_MANAGER_LEVEL = process.env.ALLOWED_TO_MANAGER_LEVEL;
 const CLE_ULTRA = process.env.CLE_ULTRA;
 const CLE_ULTRA_LEVEL = process.env.CLE_ULTRA_LEVEL;
@@ -54,7 +53,7 @@ app.get('/', (req, res) => {
 
 // ✅ Route POST avec clé secrète
 app.post('/', (req, res) => {
-  if (req.body.cle === CLE_IPHONE && ALLOWED_BY_IPHONE_LEVEL === "code") {
+  if (req.body.cle === CLE_IPHONE && CLE_IPHONE_LEVEL === "code") {
     return res.json({
       allowed_to_websocket: ALLOWED_TO_WEBSOCKET,
       allowed_to_websocket_level: ALLOWED_TO_WEBSOCKET_LEVEL,
@@ -63,7 +62,6 @@ app.post('/', (req, res) => {
       allowed_to_stockage: ALLOWED_TO_STOCKAGE,
       allowed_to_stockage_level: ALLOWED_TO_STOCKAGE_LEVEL,
       allowed_to_mail_level: ALLOWED_TO_MAIL_LEVEL,
-      allowed_by_iphone_level: ALLOWED_BY_IPHONE_LEVEL,
       allowed_to_manager_level: ALLOWED_TO_MANAGER_LEVEL,
       cle_ultra_level: CLE_ULTRA_LEVEL,
       cle_mail: CLE_MAIL,
@@ -87,7 +85,6 @@ app.post('/', (req, res) => {
       allowed_to_stockage: ALLOWED_TO_STOCKAGE,
       allowed_to_stockage_level: ALLOWED_TO_STOCKAGE_LEVEL,
       allowed_to_mail_level: ALLOWED_TO_MAIL_LEVEL,
-      allowed_by_iphone_level: ALLOWED_BY_IPHONE_LEVEL,
       allowed_to_manager_level: ALLOWED_TO_MANAGER_LEVEL,
       cle_ultra: CLE_ULTRA,
       cle_ultra_level: CLE_ULTRA_LEVEL,

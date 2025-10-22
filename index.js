@@ -130,7 +130,7 @@ app.post('/', (req, res) => {
 app.post('/cle-ultra', (req, res) => {
   if (req.body.cle === CLE_ULTRA && CLE_ULTRA_LEVEL === "code") {
     return res.json({
-      access: 'true'
+      access: 'False'
     });
   } else {
     return res.json({
@@ -154,7 +154,7 @@ app.post('/cle-iphone', (req, res) => {
 app.post('/cle-wbs', (req, res) => {
   if (req.body.cle === CLE_WBS_SRV_CONNECT && CLE_WBS_SRV_CONNECT_LEVEL === "code") {
     return res.json({
-      access: 'False'
+      access: 'true'
     });
   } else {
     return res.json({

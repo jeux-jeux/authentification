@@ -108,7 +108,8 @@ app.post('/', (req, res) => {
   } else if (req.body.cle === CLE_WBS_MNG) { // <-- placeholder 2 : modifie la condition/action ici
     return res.json({
       web_socket_server: CLOUDLINK_URL,
-      level: ALLOWED_TO_MANAGER_LEVEL
+      level: ALLOWED_TO_MANAGER_LEVEL,
+      cle_wbs: CLE_WBS_SRV_CONNECT
     });
   } else if (req.body.cle === CLE_INT_PROXY) { // <-- placeholder 3 : modifie la condition/action ici
     return res.json({
@@ -128,6 +129,18 @@ app.post('/', (req, res) => {
 
 app.post('/cle-ultra', (req, res) => {
   if (req.body.cle === CLE_ULTRA && CLE_ULTRA_LEVEL === "code") {
+    return res.json({
+      access: 'true'
+    });
+  } else {
+    return res.json({
+      access: 'false'
+    });
+  }
+});
+
+app.post('/cle-iphone', (req, res) => {
+  if (req.body.cle === CLE_IPHONE) {
     return res.json({
       access: 'true'
     });

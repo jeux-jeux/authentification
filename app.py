@@ -5,6 +5,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+
 ALLOWED_TO_WEBSOCKET = os.environ.get('ALLOWED_TO_WEBSOCKET')
 ALLOWED_TO_WEBSOCKET_LEVEL = os.environ.get('ALLOWED_TO_WEBSOCKET_LEVEL')
 ALLOWED_TO_PRINCIPAL = os.environ.get('ALLOWED_TO_PRINCIPAL')
@@ -24,9 +25,12 @@ CLE_INT_PROXY = os.environ.get('CLE_INT_PROXY')
 CLE_INT_PROXY_LEVEL = os.environ.get('CLE_INT_PROXY_LEVEL')
 CLE_IPHONE = os.environ.get('CLE_IPHONE')
 CLE_IPHONE_LEVEL = os.environ.get('CLE_IPHONE_LEVEL')
-FIREBASE_URL = os.environ.get('URL_FIREBASE')
-CLOUDLINK_URL = os.environ.get('URL_CLOUDLINK')
+FIREBASE_URL = os.environ.get('FIREBASE_URL')
+CLOUDLINK_URL = os.environ.get('CLOUDLINK_URL')
 PORT_WBS = os.environ.get('PORT_WBS')
+PORT_MAIL = os.environ.get('PORT_MAIL')
+GMAIL_PASS = os.environ.get('GMAIL_PASS')
+GMAIL_USER = os.environ.get('GMAIL_USER')
 
 # ✅ Route GET avec contrôle des origines
 @app.route('/', methods=['GET'])
@@ -77,7 +81,11 @@ def root_post():
             'cle_iphone_level': CLE_IPHONE_LEVEL,
             'firebase_url': FIREBASE_URL,
             'cloudlink_url': CLOUDLINK_URL,
-            'port_wbs': PORT_WBS
+            'firebase_url': FIREBASE_URL_REAL,
+            'port_wbs': PORT_WBS,
+            'port_mail': PORT_MAIL,
+            'gmail_pass' : GMAIL_PASS,
+            'gmail_user' : GMAIL_USER
         })
     elif data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":  # <-- placeholder 1 : modifie la condition/action ici
         return jsonify({
@@ -102,7 +110,11 @@ def root_post():
             'cle_iphone_level': CLE_IPHONE_LEVEL,
             'firebase_url': FIREBASE_URL,
             'cloudlink_url': CLOUDLINK_URL,
+            'firebase_url': FIREBASE_URL_REAL,
             'port_wbs': PORT_WBS
+            'port_mail': PORT_MAIL,
+            'gmail_pass' : GMAIL_PASS,
+            'gmail_user' : GMAIL_USER
         })
     elif data.get('cle') == CLE_WBS_SRV:  # <-- placeholder 1 : modifie la condition/action ici
         return jsonify({
@@ -118,12 +130,16 @@ def root_post():
         })
     elif data.get('cle') == CLE_INT_PROXY:  # <-- placeholder 3 : modifie la condition/action ici
         return jsonify({
+            'firebase_url': FIREBASE_URL_REAL,
             'origine_stockage': ALLOWED_TO_STOCKAGE,
             'level': ALLOWED_TO_STOCKAGE_LEVEL
         })
     elif data.get('cle') == CLE_MAIL:  # <-- placeholder 3 : modifie la condition/action ici
         return jsonify({
             'level': ALLOWED_TO_MAIL_LEVEL
+            'port_mail': PORT_MAIL,
+            'gmail_pass' : GMAIL_PASS,
+            'gmail_user' : GMAIL_USER
         })
     else:
         return jsonify({

@@ -111,7 +111,7 @@ def root_post():
             'firebase_url': FIREBASE_URL,
             'cloudlink_url': CLOUDLINK_URL,
             'firebase_url': FIREBASE_URL_REAL,
-            'port_wbs': PORT_WBS
+            'port_wbs': PORT_WBS,
             'port_mail': PORT_MAIL,
             'gmail_pass' : GMAIL_PASS,
             'gmail_user' : GMAIL_USER
@@ -136,7 +136,7 @@ def root_post():
         })
     elif data.get('cle') == CLE_MAIL:  # <-- placeholder 3 : modifie la condition/action ici
         return jsonify({
-            'level': ALLOWED_TO_MAIL_LEVEL
+            'level': ALLOWED_TO_MAIL_LEVEL,
             'port_mail': PORT_MAIL,
             'gmail_pass' : GMAIL_PASS,
             'gmail_user' : GMAIL_USER

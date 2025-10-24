@@ -26,7 +26,7 @@ CLE_IPHONE = os.environ.get('CLE_IPHONE')
 CLE_IPHONE_LEVEL = os.environ.get('CLE_IPHONE_LEVEL')
 FIREBASE_URL = os.environ.get('URL_FIREBASE')
 CLOUDLINK_URL = os.environ.get('URL_CLOUDLINK')
-
+PORT_WBS = os.environ.get('PORT_WBS')
 
 # ✅ Route GET avec contrôle des origines
 @app.route('/', methods=['GET'])
@@ -76,7 +76,8 @@ def root_post():
             'cle_iphone': CLE_IPHONE,
             'cle_iphone_level': CLE_IPHONE_LEVEL,
             'firebase_url': FIREBASE_URL,
-            'cloudlink_url': CLOUDLINK_URL
+            'cloudlink_url': CLOUDLINK_URL,
+            'port_wbs': PORT_WBS
         })
     elif data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":  # <-- placeholder 1 : modifie la condition/action ici
         return jsonify({
@@ -100,12 +101,14 @@ def root_post():
             'cle_iphone': CLE_IPHONE,
             'cle_iphone_level': CLE_IPHONE_LEVEL,
             'firebase_url': FIREBASE_URL,
-            'cloudlink_url': CLOUDLINK_URL
+            'cloudlink_url': CLOUDLINK_URL,
+            'port_wbs': PORT_WBS
         })
     elif data.get('cle') == CLE_WBS_SRV:  # <-- placeholder 1 : modifie la condition/action ici
         return jsonify({
             'allowed_origin': ALLOWED_TO_WEBSOCKET,
             'level': ALLOWED_TO_WEBSOCKET_LEVEL,
+            'port': PORT_WBS
         })
     elif data.get('cle') == CLE_WBS_MNG:  # <-- placeholder 2 : modifie la condition/action ici
         return jsonify({

@@ -12,11 +12,12 @@ ALLOWED_TO_PRINCIPAL = os.environ.get('ALLOWED_TO_PRINCIPAL')
 ALLOWED_TO_PRINCIPAL_LEVEL = os.environ.get('ALLOWED_TO_PRINCIPAL_LEVEL')
 ALLOWED_TO_STOCKAGE = os.environ.get('ALLOWED_TO_STOCKAGE')
 ALLOWED_TO_STOCKAGE_LEVEL = os.environ.get('ALLOWED_TO_STOCKAGE_LEVEL')
-ALLOWED_TO_MAIL_LEVEL = os.environ.get('ALLOWED_TO_MAIL_LEVEL')
+ALLOWED_TO_MESSAGE_LEVEL = os.environ.get('ALLOWED_TO_MESSAGE_LEVEL')
+ALLOWED_TO_MESSAGE = os.environ.get('ALLOWED_TO_MESSAGE')
 ALLOWED_TO_MANAGER_LEVEL = os.environ.get('ALLOWED_TO_MANAGER_LEVEL')
 CLE_ULTRA = os.environ.get('CLE_ULTRA')
 CLE_ULTRA_LEVEL = os.environ.get('CLE_ULTRA_LEVEL')
-CLE_MAIL = os.environ.get('ALLOWED_TO_STOCKAGE')
+CLE_MESSAGE = os.environ.get('CLE_MESSAGE')
 CLE_WBS_MNG = os.environ.get('CLE_WBS_MNG')
 CLE_WBS_SRV = os.environ.get('CLE_WBS_SRV')
 CLE_WBS_SRV_CONNECT = os.environ.get('CLE_WBS_SRV_CONNECT')
@@ -27,10 +28,13 @@ CLE_IPHONE = os.environ.get('CLE_IPHONE')
 CLE_IPHONE_LEVEL = os.environ.get('CLE_IPHONE_LEVEL')
 FIREBASE_URL = os.environ.get('FIREBASE_URL')
 CLOUDLINK_URL = os.environ.get('CLOUDLINK_URL')
+MESSAGE_URL = os.environ.get('MESSAGE_URL')
 PORT_WBS = os.environ.get('PORT_WBS')
-PORT_MAIL = os.environ.get('PORT_MAIL')
+PORT_MESSAGE = os.environ.get('PORT_MESSAGE')
 GMAIL_PASS = os.environ.get('GMAIL_PASS')
 GMAIL_USER = os.environ.get('GMAIL_USER')
+NTFY_URL = os.environ.get('NTFY_URL')
+EMAIL = os.environ.get('EMAIL')
 
 # ✅ Route GET avec contrôle des origines
 @app.route('/', methods=['GET'])
@@ -45,6 +49,7 @@ def root_get():
 
     if origin in allowedOrigins:
         return jsonify({
+            'url_message': MESSAGE_URL
             'url': FIREBASE_URL,
             'web_socket_server': CLOUDLINK_URL
         })
@@ -67,10 +72,11 @@ def root_post():
             'allowed_to_principal_level': ALLOWED_TO_PRINCIPAL_LEVEL,
             'allowed_to_stockage': ALLOWED_TO_STOCKAGE,
             'allowed_to_stockage_level': ALLOWED_TO_STOCKAGE_LEVEL,
-            'allowed_to_mail_level': ALLOWED_TO_MAIL_LEVEL,
+            'allowed_to_message_level': ALLOWED_TO_MESSAGE_LEVEL,
+            'allowed_to_message': ALLOWED_TO_MESSAGE,
             'allowed_to_manager_level': ALLOWED_TO_MANAGER_LEVEL,
             'cle_ultra_level': CLE_ULTRA_LEVEL,
-            'cle_mail': CLE_MAIL,
+            'cle_message': CLE_MESSAGE,
             'cle_wbs_mng': CLE_WBS_MNG,
             'cle_wbs_srv': CLE_WBS_SRV,
             'cle_wbs_srv_connect': CLE_WBS_SRV_CONNECT,
@@ -83,9 +89,11 @@ def root_post():
             'cloudlink_url': CLOUDLINK_URL,
             'firebase_url': FIREBASE_URL_REAL,
             'port_wbs': PORT_WBS,
-            'port_mail': PORT_MAIL,
+            'port_message': PORT_MESSAGE,
             'gmail_pass' : GMAIL_PASS,
-            'gmail_user' : GMAIL_USER
+            'gmail_user' : GMAIL_USER,
+            'ntfy_url': NTFY_URL,
+            'email': EMAIL
         })
     elif data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":  # <-- placeholder 1 : modifie la condition/action ici
         return jsonify({
@@ -95,11 +103,12 @@ def root_post():
             'allowed_to_principal_level': ALLOWED_TO_PRINCIPAL_LEVEL,
             'allowed_to_stockage': ALLOWED_TO_STOCKAGE,
             'allowed_to_stockage_level': ALLOWED_TO_STOCKAGE_LEVEL,
-            'allowed_to_mail_level': ALLOWED_TO_MAIL_LEVEL,
+            'allowed_to_message_level': ALLOWED_TO_MESSAGE_LEVEL,
+            'allowed_to_message': ALLOWED_TO_MESSAGE,
             'allowed_to_manager_level': ALLOWED_TO_MANAGER_LEVEL,
-            'cle_ultra': CLE_ULTRA,
             'cle_ultra_level': CLE_ULTRA_LEVEL,
-            'cle_mail': CLE_MAIL,
+            'cle_ultra': CLE_ULTRA,
+            'cle_message': CLE_MESSAGE,
             'cle_wbs_mng': CLE_WBS_MNG,
             'cle_wbs_srv': CLE_WBS_SRV,
             'cle_wbs_srv_connect': CLE_WBS_SRV_CONNECT,
@@ -112,9 +121,11 @@ def root_post():
             'cloudlink_url': CLOUDLINK_URL,
             'firebase_url': FIREBASE_URL_REAL,
             'port_wbs': PORT_WBS,
-            'port_mail': PORT_MAIL,
+            'port_message': PORT_MESSAGE,
             'gmail_pass' : GMAIL_PASS,
-            'gmail_user' : GMAIL_USER
+            'gmail_user' : GMAIL_USER,
+            'ntfy_url': NTFY_URL,
+            'email': EMAIL
         })
     elif data.get('cle') == CLE_WBS_SRV:  # <-- placeholder 1 : modifie la condition/action ici
         return jsonify({
@@ -134,12 +145,15 @@ def root_post():
             'origine_stockage': ALLOWED_TO_STOCKAGE,
             'level': ALLOWED_TO_STOCKAGE_LEVEL
         })
-    elif data.get('cle') == CLE_MAIL:  # <-- placeholder 3 : modifie la condition/action ici
+    elif data.get('cle') == CLE_MESSAGE:  # <-- placeholder 3 : modifie la condition/action ici
         return jsonify({
-            'level': ALLOWED_TO_MAIL_LEVEL,
-            'port_mail': PORT_MAIL,
+            'allowed': ALLOWED_TO_MESSAGE,
+            'level': ALLOWED_TO_MESSAGE_LEVEL,
+            'port_message': PORT_MESSAGE,
             'gmail_pass' : GMAIL_PASS,
-            'gmail_user' : GMAIL_USER
+            'gmail_user' : GMAIL_USER,
+            'ntfy_url': NTFY_URL,
+            'email': EMAIL
         })
     else:
         return jsonify({

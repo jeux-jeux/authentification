@@ -49,7 +49,7 @@ def root_get():
 
     if origin in allowedOrigins:
         return jsonify({
-            'url_message': MESSAGE_URL
+            'url_message': MESSAGE_URL,
             'url': FIREBASE_URL,
             'web_socket_server': CLOUDLINK_URL
         })

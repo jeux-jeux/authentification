@@ -27,6 +27,7 @@ CLE_INT_PROXY_LEVEL = os.environ.get('CLE_INT_PROXY_LEVEL')
 CLE_IPHONE = os.environ.get('CLE_IPHONE')
 CLE_IPHONE_LEVEL = os.environ.get('CLE_IPHONE_LEVEL')
 FIREBASE_URL = os.environ.get('FIREBASE_URL')
+FIREBASE_URL_REAL = os.environ.get('FIREBASE_URL_REAL')
 CLOUDLINK_URL = os.environ.get('CLOUDLINK_URL')
 MESSAGE_URL = os.environ.get('MESSAGE_URL')
 PORT_WBS = os.environ.get('PORT_WBS')
@@ -35,6 +36,7 @@ GMAIL_PASS = os.environ.get('GMAIL_PASS')
 GMAIL_USER = os.environ.get('GMAIL_USER')
 NTFY_URL = os.environ.get('NTFY_URL')
 EMAIL = os.environ.get('EMAIL')
+MANAGER_URL = os.environ.get('MANAGER_URL')
 
 # ✅ Route GET avec contrôle des origines
 @app.route('/', methods=['GET'])
@@ -87,13 +89,14 @@ def root_post():
             'cle_iphone_level': CLE_IPHONE_LEVEL,
             'firebase_url': FIREBASE_URL,
             'cloudlink_url': CLOUDLINK_URL,
-            'firebase_url': FIREBASE_URL_REAL,
+            'firebase_url_real': FIREBASE_URL_REAL,
             'port_wbs': PORT_WBS,
             'port_message': PORT_MESSAGE,
             'gmail_pass' : GMAIL_PASS,
             'gmail_user' : GMAIL_USER,
             'ntfy_url': NTFY_URL,
-            'email': EMAIL
+            'email': EMAIL,
+            'manager': MANAGER_URL
         })
     elif data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":  # <-- placeholder 1 : modifie la condition/action ici
         return jsonify({
@@ -119,13 +122,14 @@ def root_post():
             'cle_iphone_level': CLE_IPHONE_LEVEL,
             'firebase_url': FIREBASE_URL,
             'cloudlink_url': CLOUDLINK_URL,
-            'firebase_url': FIREBASE_URL_REAL,
+            'firebase_url_real': FIREBASE_URL_REAL,
             'port_wbs': PORT_WBS,
             'port_message': PORT_MESSAGE,
             'gmail_pass' : GMAIL_PASS,
             'gmail_user' : GMAIL_USER,
             'ntfy_url': NTFY_URL,
-            'email': EMAIL
+            'email': EMAIL,
+            'manager': MANAGER_URL
         })
     elif data.get('cle') == CLE_WBS_SRV:  # <-- placeholder 1 : modifie la condition/action ici
         return jsonify({

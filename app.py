@@ -101,7 +101,8 @@ def root_post():
             'gmail_user' : GMAIL_USER,
             'ntfy_url': NTFY_URL,
             'email': EMAIL,
-            'manager_url': MANAGER_URL
+            'manager_url': MANAGER_URL,
+            'port_aut': PORT_AUT
         })
     elif data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":  # <-- placeholder 1 : modifie la condition/action ici
         return jsonify({
@@ -137,7 +138,8 @@ def root_post():
             'gmail_user' : GMAIL_USER,
             'ntfy_url': NTFY_URL,
             'email': EMAIL,
-            'manager_url': MANAGER_URL
+            'manager_url': MANAGER_URL,
+            'port_aut': PORT_AUT
         })
     elif data.get('cle') == CLE_WBS_SRV:  # <-- placeholder 1 : modifie la condition/action ici
         return jsonify({
@@ -222,6 +224,6 @@ def not_found(e):
 
 # ✅ Render attribue le port via process.env.PORT
 if __name__ == '__main__':
-    PORT = int(os.environ.get('PORT', 5000))
+    PORT = int(os.environ.get(PORT_AUT))
     print(f"⚡️ Proxy authentification actif sur le port {PORT}")
     app.run(host='0.0.0.0', port=PORT)

@@ -32,6 +32,7 @@ CLOUDLINK_URL = os.environ.get('CLOUDLINK_URL')
 MESSAGE_URL = os.environ.get('MESSAGE_URL')
 PORT_WBS = os.environ.get('PORT_WBS')
 PORT_MESSAGE = os.environ.get('PORT_MESSAGE')
+
 GMAIL_PASS = os.environ.get('GMAIL_PASS')
 GMAIL_USER = os.environ.get('GMAIL_USER')
 NTFY_URL = os.environ.get('NTFY_URL')

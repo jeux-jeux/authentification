@@ -32,7 +32,8 @@ CLOUDLINK_URL = os.environ.get('CLOUDLINK_URL')
 MESSAGE_URL = os.environ.get('MESSAGE_URL')
 PORT_WBS = os.environ.get('PORT_WBS')
 PORT_MESSAGE = os.environ.get('PORT_MESSAGE')
-
+PORT_MANAGER = os.environ.get('PORT_MANAGER')
+PORT_FIREBASE = os.environ.get('PORT_FIREBASE')
 GMAIL_PASS = os.environ.get('GMAIL_PASS')
 GMAIL_USER = os.environ.get('GMAIL_USER')
 NTFY_URL = os.environ.get('NTFY_URL')
@@ -91,13 +92,16 @@ def root_post():
             'firebase_url': FIREBASE_URL,
             'cloudlink_url': CLOUDLINK_URL,
             'firebase_url_real': FIREBASE_URL_REAL,
+            'message_url': MESSAGE_URL,
             'port_wbs': PORT_WBS,
             'port_message': PORT_MESSAGE,
+            'port_firebase': PORT_FIREBASE,
+            'port_manager': PORT_MANAGER,
             'gmail_pass' : GMAIL_PASS,
             'gmail_user' : GMAIL_USER,
             'ntfy_url': NTFY_URL,
             'email': EMAIL,
-            'manager': MANAGER_URL
+            'manager_url': MANAGER_URL
         })
     elif data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":  # <-- placeholder 1 : modifie la condition/action ici
         return jsonify({
@@ -124,13 +128,16 @@ def root_post():
             'firebase_url': FIREBASE_URL,
             'cloudlink_url': CLOUDLINK_URL,
             'firebase_url_real': FIREBASE_URL_REAL,
+            'message_url': MESSAGE_URL,
             'port_wbs': PORT_WBS,
             'port_message': PORT_MESSAGE,
+            'port_firebase': PORT_FIREBASE,
+            'port_manager': PORT_MANAGER,
             'gmail_pass' : GMAIL_PASS,
             'gmail_user' : GMAIL_USER,
             'ntfy_url': NTFY_URL,
             'email': EMAIL,
-            'manager': MANAGER_URL
+            'manager_url': MANAGER_URL
         })
     elif data.get('cle') == CLE_WBS_SRV:  # <-- placeholder 1 : modifie la condition/action ici
         return jsonify({
@@ -142,13 +149,15 @@ def root_post():
         return jsonify({
             'web_socket_server': CLOUDLINK_URL,
             'level': ALLOWED_TO_MANAGER_LEVEL,
-            'cle_wbs': CLE_WBS_SRV_CONNECT
+            'cle_wbs': CLE_WBS_SRV_CONNECT,
+            'port': PORT_MANAGER
         })
     elif data.get('cle') == CLE_INT_PROXY:  # <-- placeholder 3 : modifie la condition/action ici
         return jsonify({
             'firebase_url': FIREBASE_URL_REAL,
             'origine_stockage': ALLOWED_TO_STOCKAGE,
-            'level': ALLOWED_TO_STOCKAGE_LEVEL
+            'level': ALLOWED_TO_STOCKAGE_LEVEL,
+            'port': PORT_FIREBASE
         })
     elif data.get('cle') == CLE_MESSAGE:  # <-- placeholder 3 : modifie la condition/action ici
         return jsonify({

@@ -39,6 +39,7 @@ GMAIL_USER = os.environ.get('GMAIL_USER')
 NTFY_URL = os.environ.get('NTFY_URL')
 EMAIL = os.environ.get('EMAIL')
 MANAGER_URL = os.environ.get('MANAGER_URL')
+PORT_AUT = os.environ.get('PORT_AUT')
 
 # ✅ Route GET avec contrôle des origines
 @app.route('/', methods=['GET'])
@@ -224,6 +225,6 @@ def not_found(e):
 
 # ✅ Render attribue le port via process.env.PORT
 if __name__ == '__main__':
-    PORT = int(os.environ.get(PORT_AUT))
+    PORT = int(PORT_AUT)
     print(f"⚡️ Proxy authentification actif sur le port {PORT}")
     app.run(host='0.0.0.0', port=PORT)

@@ -4,6 +4,15 @@ import os
 
 app = Flask(__name__)
 CORS(app)
+data_cache = {
+    "get":[],
+    "iphone":[],
+    "ultra":[],
+    "websocket":[],
+    "manager":[],
+    "stockage":[],
+    "message":[]
+}
 
 
 ALLOWED_TO_WEBSOCKET = os.environ.get('ALLOWED_TO_WEBSOCKET')
@@ -40,6 +49,23 @@ NTFY_URL = os.environ.get('NTFY_URL')
 EMAIL = os.environ.get('EMAIL')
 MANAGER_URL = os.environ.get('MANAGER_URL')
 PORT_AUT = os.environ.get('PORT_AUT')
+
+def filtrer(liste):
+    maintenant = time.time()
+    liste_return = liste
+    while maintenant - liste_return[0] > 30:
+        liste_return.pop(0)
+    return liste_return
+def nettoyer_historique():
+    """Supprime les entrées de plus de 30 secondes"""
+
+
+@app.before_request
+def enregistrer_requete():
+    """Ajoute un horodatage à chaque requête"""
+    historique_requetes.append(time.time())
+    nettoyer_historique()
+
 
 # ✅ Route GET avec contrôle des origines
 @app.route('/', methods=['GET'])

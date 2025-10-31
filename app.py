@@ -58,18 +58,21 @@ def filtrer(liste):
     return liste_return
 def nettoyer_historique():
     """Supprime les entrées de plus de 30 secondes"""
-    data_cache[""] = filtrer(data_cache[""])
+    for cle in data_cache:
+        data_cache["cle"] = filtrer(data_cache["cle"])
+    
 
 @app.before_request
 def enregistrer_requete():
     """Ajoute un horodatage à chaque requête"""
-    historique_requetes.append(time.time())
     nettoyer_historique()
 
 
 # ✅ Route GET avec contrôle des origines
 @app.route('/', methods=['GET'])
 def root_get():
+    cle_data = "get"
+    data_cache["cle_data"] = data_cache["cle_data"].append(time.time())
     origin = request.headers.get('Origin')
     allowedOrigins = ALLOWED_TO_PRINCIPAL
     # Si aucune origine n'est fournie, on refuse tout de suite
@@ -96,6 +99,8 @@ def root_post():
     data = request.get_json() or {}
 
     if data.get('cle') == CLE_IPHONE and CLE_IPHONE_LEVEL == "code":
+        cle_data = "iphone"
+        data_cache["cle_data"] = data_cache["cle_data"].append(time.time())
         return jsonify({
             'allowed_to_websocket': ALLOWED_TO_WEBSOCKET,
             'allowed_to_websocket_level': ALLOWED_TO_WEBSOCKET_LEVEL,

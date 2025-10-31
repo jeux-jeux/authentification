@@ -15,6 +15,64 @@ data_cache = {
     "message":[]
 }
 
+get_json = {
+    'url_message': MESSAGE_URL,
+    'url': FIREBASE_URL,
+    'web_socket_server': CLOUDLINK_URL,
+    'bits': data_cache
+}
+
+iphone_json = {
+    'allowed_to_websocket': ALLOWED_TO_WEBSOCKET,
+    'allowed_to_websocket_level': ALLOWED_TO_WEBSOCKET_LEVEL,
+    'allowed_to_principal': ALLOWED_TO_PRINCIPAL,
+    'allowed_to_principal_level': ALLOWED_TO_PRINCIPAL_LEVEL,
+    'allowed_to_stockage': ALLOWED_TO_STOCKAGE,
+    'allowed_to_stockage_level': ALLOWED_TO_STOCKAGE_LEVEL,
+    'allowed_to_message_level': ALLOWED_TO_MESSAGE_LEVEL,
+    'allowed_to_message': ALLOWED_TO_MESSAGE,
+    'allowed_to_manager_level': ALLOWED_TO_MANAGER_LEVEL,
+    'cle_ultra_level': CLE_ULTRA_LEVEL,
+    'cle_message': CLE_MESSAGE,
+    'cle_wbs_mng': CLE_WBS_MNG,
+    'cle_wbs_srv': CLE_WBS_SRV,
+    'cle_wbs_srv_connect': CLE_WBS_SRV_CONNECT,
+    'cle_wbs_srv_connect_level': CLE_WBS_SRV_CONNECT_LEVEL,
+    'cle_int_proxy': CLE_INT_PROXY,
+    'cle_int_proxy_level': CLE_INT_PROXY_LEVEL,
+    'cle_iphone': CLE_IPHONE,
+    'cle_iphone_level': CLE_IPHONE_LEVEL,
+    'firebase_url': FIREBASE_URL,
+    'cloudlink_url': CLOUDLINK_URL,
+    'firebase_url_real': FIREBASE_URL_REAL,
+    'message_url': MESSAGE_URL,
+    'port_wbs': PORT_WBS,
+    'port_message': PORT_MESSAGE,
+    'port_firebase': PORT_FIREBASE,
+    'port_manager': PORT_MANAGER,
+    'gmail_pass': GMAIL_PASS,
+    'gmail_user': GMAIL_USER,
+    'ntfy_url': NTFY_URL,
+    'email': EMAIL,
+    'manager_url': MANAGER_URL,
+    'port_aut': PORT_AUT,
+    'bits': data_cache
+}
+
+ultra_json = iphone_json
+ultra_json["cle_ultra"] = CLE_ULTRA
+
+wbs_json = {
+    'allowed_origin': ALLOWED_TO_WEBSOCKET,
+    'level': ALLOWED_TO_WEBSOCKET_LEVEL,
+    'port': PORT_WBS
+}
+
+manager_json = 
+
+message_json =
+
+stockage_json =
 
 ALLOWED_TO_WEBSOCKET = os.environ.get('ALLOWED_TO_WEBSOCKET')
 ALLOWED_TO_WEBSOCKET_LEVEL = os.environ.get('ALLOWED_TO_WEBSOCKET_LEVEL')
@@ -84,12 +142,7 @@ def root_get():
     if origin in allowedOrigins:
         cle_data = "get"
         data_cache[cle_data].append(time.time())
-        return jsonify({
-            'url_message': MESSAGE_URL,
-            'url': FIREBASE_URL,
-            'web_socket_server': CLOUDLINK_URL,
-            'bits': data_cache
-        })
+        return jsonify(get_json)
 
     return jsonify({
         'message': 'Accès refusé'
@@ -104,90 +157,18 @@ def root_post():
     if data.get('cle') == CLE_IPHONE and CLE_IPHONE_LEVEL == "code":
         cle_data = "iphone"
         data_cache[cle_data].append(time.time())
-        return jsonify({
-            'allowed_to_websocket': ALLOWED_TO_WEBSOCKET,
-            'allowed_to_websocket_level': ALLOWED_TO_WEBSOCKET_LEVEL,
-            'allowed_to_principal': ALLOWED_TO_PRINCIPAL,
-            'allowed_to_principal_level': ALLOWED_TO_PRINCIPAL_LEVEL,
-            'allowed_to_stockage': ALLOWED_TO_STOCKAGE,
-            'allowed_to_stockage_level': ALLOWED_TO_STOCKAGE_LEVEL,
-            'allowed_to_message_level': ALLOWED_TO_MESSAGE_LEVEL,
-            'allowed_to_message': ALLOWED_TO_MESSAGE,
-            'allowed_to_manager_level': ALLOWED_TO_MANAGER_LEVEL,
-            'cle_ultra_level': CLE_ULTRA_LEVEL,
-            'cle_message': CLE_MESSAGE,
-            'cle_wbs_mng': CLE_WBS_MNG,
-            'cle_wbs_srv': CLE_WBS_SRV,
-            'cle_wbs_srv_connect': CLE_WBS_SRV_CONNECT,
-            'cle_wbs_srv_connect_level': CLE_WBS_SRV_CONNECT_LEVEL,
-            'cle_int_proxy': CLE_INT_PROXY,
-            'cle_int_proxy_level': CLE_INT_PROXY_LEVEL,
-            'cle_iphone': CLE_IPHONE,
-            'cle_iphone_level': CLE_IPHONE_LEVEL,
-            'firebase_url': FIREBASE_URL,
-            'cloudlink_url': CLOUDLINK_URL,
-            'firebase_url_real': FIREBASE_URL_REAL,
-            'message_url': MESSAGE_URL,
-            'port_wbs': PORT_WBS,
-            'port_message': PORT_MESSAGE,
-            'port_firebase': PORT_FIREBASE,
-            'port_manager': PORT_MANAGER,
-            'gmail_pass' : GMAIL_PASS,
-            'gmail_user' : GMAIL_USER,
-            'ntfy_url': NTFY_URL,
-            'email': EMAIL,
-            'manager_url': MANAGER_URL,
-            'port_aut': PORT_AUT,
-            'bits': data_cache
-        })
+        return jsonify(iphone_json)
+        
     elif data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":  # <-- placeholder 1 : modifie la condition/action ici
         cle_data = "ultra"
         data_cache[cle_data].append(time.time())
-        return jsonify({
-            'allowed_to_websocket': ALLOWED_TO_WEBSOCKET,
-            'allowed_to_websocket_level': ALLOWED_TO_WEBSOCKET_LEVEL,
-            'allowed_to_principal': ALLOWED_TO_PRINCIPAL,
-            'allowed_to_principal_level': ALLOWED_TO_PRINCIPAL_LEVEL,
-            'allowed_to_stockage': ALLOWED_TO_STOCKAGE,
-            'allowed_to_stockage_level': ALLOWED_TO_STOCKAGE_LEVEL,
-            'allowed_to_message_level': ALLOWED_TO_MESSAGE_LEVEL,
-            'allowed_to_message': ALLOWED_TO_MESSAGE,
-            'allowed_to_manager_level': ALLOWED_TO_MANAGER_LEVEL,
-            'cle_ultra_level': CLE_ULTRA_LEVEL,
-            'cle_ultra': CLE_ULTRA,
-            'cle_message': CLE_MESSAGE,
-            'cle_wbs_mng': CLE_WBS_MNG,
-            'cle_wbs_srv': CLE_WBS_SRV,
-            'cle_wbs_srv_connect': CLE_WBS_SRV_CONNECT,
-            'cle_wbs_srv_connect_level': CLE_WBS_SRV_CONNECT_LEVEL,
-            'cle_int_proxy': CLE_INT_PROXY,
-            'cle_int_proxy_level': CLE_INT_PROXY_LEVEL,
-            'cle_iphone': CLE_IPHONE,
-            'cle_iphone_level': CLE_IPHONE_LEVEL,
-            'firebase_url': FIREBASE_URL,
-            'cloudlink_url': CLOUDLINK_URL,
-            'firebase_url_real': FIREBASE_URL_REAL,
-            'message_url': MESSAGE_URL,
-            'port_wbs': PORT_WBS,
-            'port_message': PORT_MESSAGE,
-            'port_firebase': PORT_FIREBASE,
-            'port_manager': PORT_MANAGER,
-            'gmail_pass' : GMAIL_PASS,
-            'gmail_user' : GMAIL_USER,
-            'ntfy_url': NTFY_URL,
-            'email': EMAIL,
-            'manager_url': MANAGER_URL,
-            'port_aut': PORT_AUT,
-            'bits': data_cache
-        })
+        return jsonify(ultra_json)
+        
     elif data.get('cle') == CLE_WBS_SRV:  # <-- placeholder 1 : modifie la condition/action ici
         cle_data = "websocket"
         data_cache[cle_data].append(time.time())
-        return jsonify({
-            'allowed_origin': ALLOWED_TO_WEBSOCKET,
-            'level': ALLOWED_TO_WEBSOCKET_LEVEL,
-            'port': PORT_WBS
-        })
+        return jsonify(wbs_json)
+        
     elif data.get('cle') == CLE_WBS_MNG:  # <-- placeholder 2 : modifie la condition/action ici
         cle_data = "manager"
         data_cache[cle_data].append(time.time())

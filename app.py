@@ -154,14 +154,16 @@ def nettoyer_historique():
 def enregistrer_requete():
     """Ajoute un horodatage à chaque requête"""
     nettoyer_historique()
+    def bits_fonction(response, category):
+        return len(str(reponse))*16*len(data_cache[category])
     bits_json = {
-        "get":len(str(get_json))*16,
-        "iphone":len(str(iphone_json))*16,
-        "ultra":len(str(ultra_json))*16,
-        "wbs":len(str(wbs_json))*16,
-        "manager":len(str(manager_json))*16,
-        "message":len(str(message_json))*16,
-        "stockage":len(str(stockage_json))*16
+        "get":bits_fonction(get_json, get),
+        "iphone":bits_fonction(iphone_json, iphone),
+        "ultra":bits_fonction(ultra_json, ultra),
+        "wbs":bits_fonction(wbs_json, websocket),
+        "manager":bits_fonction(manager_json, manager),
+        "message":bits_fonction(message_json, message),
+        "stockage":bits_fonction(stockage_json, stockage)
     }
     get_json["bits"] = bits_json
     iphone_json["bits"] = bits_json

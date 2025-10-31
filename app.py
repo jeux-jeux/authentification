@@ -54,8 +54,9 @@ PORT_AUT = os.environ.get('PORT_AUT')
 def filtrer(liste):
     maintenant = time.time()
     liste_return = liste
-    while maintenant - liste_return[0] > 30:
-        liste_return.pop(0)
+    if len(liste_return) > 0:
+        while maintenant - liste_return[0] > 30:
+            liste_return.pop(0)
     return liste_return
 def nettoyer_historique():
     """Supprime les entrées de plus de 30 secondes"""

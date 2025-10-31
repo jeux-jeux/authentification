@@ -5,75 +5,8 @@ import time
 
 app = Flask(__name__)
 CORS(app)
-data_cache = {
-    "get":[],
-    "iphone":[],
-    "ultra":[],
-    "websocket":[],
-    "manager":[],
-    "stockage":[],
-    "message":[]
-}
 
-get_json = {
-    'url_message': MESSAGE_URL,
-    'url': FIREBASE_URL,
-    'web_socket_server': CLOUDLINK_URL,
-    'bits': data_cache
-}
-
-iphone_json = {
-    'allowed_to_websocket': ALLOWED_TO_WEBSOCKET,
-    'allowed_to_websocket_level': ALLOWED_TO_WEBSOCKET_LEVEL,
-    'allowed_to_principal': ALLOWED_TO_PRINCIPAL,
-    'allowed_to_principal_level': ALLOWED_TO_PRINCIPAL_LEVEL,
-    'allowed_to_stockage': ALLOWED_TO_STOCKAGE,
-    'allowed_to_stockage_level': ALLOWED_TO_STOCKAGE_LEVEL,
-    'allowed_to_message_level': ALLOWED_TO_MESSAGE_LEVEL,
-    'allowed_to_message': ALLOWED_TO_MESSAGE,
-    'allowed_to_manager_level': ALLOWED_TO_MANAGER_LEVEL,
-    'cle_ultra_level': CLE_ULTRA_LEVEL,
-    'cle_message': CLE_MESSAGE,
-    'cle_wbs_mng': CLE_WBS_MNG,
-    'cle_wbs_srv': CLE_WBS_SRV,
-    'cle_wbs_srv_connect': CLE_WBS_SRV_CONNECT,
-    'cle_wbs_srv_connect_level': CLE_WBS_SRV_CONNECT_LEVEL,
-    'cle_int_proxy': CLE_INT_PROXY,
-    'cle_int_proxy_level': CLE_INT_PROXY_LEVEL,
-    'cle_iphone': CLE_IPHONE,
-    'cle_iphone_level': CLE_IPHONE_LEVEL,
-    'firebase_url': FIREBASE_URL,
-    'cloudlink_url': CLOUDLINK_URL,
-    'firebase_url_real': FIREBASE_URL_REAL,
-    'message_url': MESSAGE_URL,
-    'port_wbs': PORT_WBS,
-    'port_message': PORT_MESSAGE,
-    'port_firebase': PORT_FIREBASE,
-    'port_manager': PORT_MANAGER,
-    'gmail_pass': GMAIL_PASS,
-    'gmail_user': GMAIL_USER,
-    'ntfy_url': NTFY_URL,
-    'email': EMAIL,
-    'manager_url': MANAGER_URL,
-    'port_aut': PORT_AUT,
-    'bits': data_cache
-}
-
-ultra_json = iphone_json
-ultra_json["cle_ultra"] = CLE_ULTRA
-
-wbs_json = {
-    'allowed_origin': ALLOWED_TO_WEBSOCKET,
-    'level': ALLOWED_TO_WEBSOCKET_LEVEL,
-    'port': PORT_WBS
-}
-
-manager_json = 
-
-message_json =
-
-stockage_json =
-
+# Definition des variables environnements
 ALLOWED_TO_WEBSOCKET = os.environ.get('ALLOWED_TO_WEBSOCKET')
 ALLOWED_TO_WEBSOCKET_LEVEL = os.environ.get('ALLOWED_TO_WEBSOCKET_LEVEL')
 ALLOWED_TO_PRINCIPAL = os.environ.get('ALLOWED_TO_PRINCIPAL')
@@ -109,6 +42,102 @@ EMAIL = os.environ.get('EMAIL')
 MANAGER_URL = os.environ.get('MANAGER_URL')
 PORT_AUT = os.environ.get('PORT_AUT')
 
+
+
+
+
+
+# Defintion des reponses http
+get_json = {
+    'url_message': MESSAGE_URL,
+    'url': FIREBASE_URL,
+    'web_socket_server': CLOUDLINK_URL
+}
+
+iphone_json = {
+    'allowed_to_websocket': ALLOWED_TO_WEBSOCKET,
+    'allowed_to_websocket_level': ALLOWED_TO_WEBSOCKET_LEVEL,
+    'allowed_to_principal': ALLOWED_TO_PRINCIPAL,
+    'allowed_to_principal_level': ALLOWED_TO_PRINCIPAL_LEVEL,
+    'allowed_to_stockage': ALLOWED_TO_STOCKAGE,
+    'allowed_to_stockage_level': ALLOWED_TO_STOCKAGE_LEVEL,
+    'allowed_to_message_level': ALLOWED_TO_MESSAGE_LEVEL,
+    'allowed_to_message': ALLOWED_TO_MESSAGE,
+    'allowed_to_manager_level': ALLOWED_TO_MANAGER_LEVEL,
+    'cle_ultra_level': CLE_ULTRA_LEVEL,
+    'cle_message': CLE_MESSAGE,
+    'cle_wbs_mng': CLE_WBS_MNG,
+    'cle_wbs_srv': CLE_WBS_SRV,
+    'cle_wbs_srv_connect': CLE_WBS_SRV_CONNECT,
+    'cle_wbs_srv_connect_level': CLE_WBS_SRV_CONNECT_LEVEL,
+    'cle_int_proxy': CLE_INT_PROXY,
+    'cle_int_proxy_level': CLE_INT_PROXY_LEVEL,
+    'cle_iphone': CLE_IPHONE,
+    'cle_iphone_level': CLE_IPHONE_LEVEL,
+    'firebase_url': FIREBASE_URL,
+    'cloudlink_url': CLOUDLINK_URL,
+    'firebase_url_real': FIREBASE_URL_REAL,
+    'message_url': MESSAGE_URL,
+    'port_wbs': PORT_WBS,
+    'port_message': PORT_MESSAGE,
+    'port_firebase': PORT_FIREBASE,
+    'port_manager': PORT_MANAGER,
+    'gmail_pass': GMAIL_PASS,
+    'gmail_user': GMAIL_USER,
+    'ntfy_url': NTFY_URL,
+    'email': EMAIL,
+    'manager_url': MANAGER_URL,
+    'port_aut': PORT_AUT
+}
+
+ultra_json = iphone_json
+ultra_json["cle_ultra"] = CLE_ULTRA
+
+wbs_json = {
+    'allowed_origin': ALLOWED_TO_WEBSOCKET,
+    'level': ALLOWED_TO_WEBSOCKET_LEVEL,
+    'port': PORT_WBS
+}
+
+manager_json = {
+    'web_socket_server': CLOUDLINK_URL,
+    'level': ALLOWED_TO_MANAGER_LEVEL,
+    'cle_wbs': CLE_WBS_SRV_CONNECT,
+    'port': PORT_MANAGER
+}
+
+message_json = {
+    'allowed': ALLOWED_TO_MESSAGE,
+    'level': ALLOWED_TO_MESSAGE_LEVEL,
+    'port_message': PORT_MESSAGE,
+    'gmail_pass' : GMAIL_PASS,
+    'gmail_user' : GMAIL_USER,
+    'ntfy_url': NTFY_URL,
+    'email': EMAIL
+}
+
+stockage_json = {
+    'firebase_url': FIREBASE_URL_REAL,
+    'origine_stockage': ALLOWED_TO_STOCKAGE,
+    'level': ALLOWED_TO_STOCKAGE_LEVEL,
+    'port': PORT_FIREBASE
+}
+
+
+
+
+
+
+#Compteur bits
+data_cache = {
+    "get":[],
+    "iphone":[],
+    "ultra":[],
+    "websocket":[],
+    "manager":[],
+    "stockage":[],
+    "message":[]
+}
 def filtrer(liste):
     maintenant = time.time()
     liste_return = liste
@@ -120,12 +149,26 @@ def nettoyer_historique():
     """Supprime les entrées de plus de 30 secondes"""
     for cle in data_cache:
         data_cache[cle] = filtrer(data_cache[cle])
-    
 
 @app.before_request
 def enregistrer_requete():
     """Ajoute un horodatage à chaque requête"""
     nettoyer_historique()
+    bits_json = {
+        "get":len(str(get_json)*16,
+        "iphone":len(str(iphone_json)*16,
+        "ultra":len(str(ultra_json)*16,
+        "wbs":len(str(wbs_json)*16,
+        "manager":len(str(manager_json)*16,
+        "message":len(str(message_json)*16,
+        "stockage":len(str(stockage_json)*16
+    }
+    get_json["bits"] = bits_json
+    iphone_json["bits"] = bits_json
+    ultra_json["bits"] = bits_json
+
+
+
 
 
 # ✅ Route GET avec contrôle des origines
@@ -172,33 +215,18 @@ def root_post():
     elif data.get('cle') == CLE_WBS_MNG:  # <-- placeholder 2 : modifie la condition/action ici
         cle_data = "manager"
         data_cache[cle_data].append(time.time())
-        return jsonify({
-            'web_socket_server': CLOUDLINK_URL,
-            'level': ALLOWED_TO_MANAGER_LEVEL,
-            'cle_wbs': CLE_WBS_SRV_CONNECT,
-            'port': PORT_MANAGER
-        })
+        return jsonify(manager_json)
+        
     elif data.get('cle') == CLE_INT_PROXY:  # <-- placeholder 3 : modifie la condition/action ici
         cle_data = "stockage"
         data_cache[cle_data].append(time.time())
-        return jsonify({
-            'firebase_url': FIREBASE_URL_REAL,
-            'origine_stockage': ALLOWED_TO_STOCKAGE,
-            'level': ALLOWED_TO_STOCKAGE_LEVEL,
-            'port': PORT_FIREBASE
-        })
+        return jsonify(stockage_json)
+        
     elif data.get('cle') == CLE_MESSAGE:  # <-- placeholder 3 : modifie la condition/action ici
         cle_data = "message"
         data_cache[cle_data].append(time.time())
-        return jsonify({
-            'allowed': ALLOWED_TO_MESSAGE,
-            'level': ALLOWED_TO_MESSAGE_LEVEL,
-            'port_message': PORT_MESSAGE,
-            'gmail_pass' : GMAIL_PASS,
-            'gmail_user' : GMAIL_USER,
-            'ntfy_url': NTFY_URL,
-            'email': EMAIL
-        })
+        return jsonify(message_json)
+        
     else:
         return jsonify({
             'message': 'Accès refusé'

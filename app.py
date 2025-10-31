@@ -58,7 +58,7 @@ def filtrer(liste):
     return liste_return
 def nettoyer_historique():
     """Supprime les entrées de plus de 30 secondes"""
-
+    data_cache[""] = filtrer(data_cache[""])
 
 @app.before_request
 def enregistrer_requete():

@@ -87,7 +87,8 @@ def root_get():
         return jsonify({
             'url_message': MESSAGE_URL,
             'url': FIREBASE_URL,
-            'web_socket_server': CLOUDLINK_URL
+            'web_socket_server': CLOUDLINK_URL,
+            'bits': data_cache
         })
 
     return jsonify({
@@ -136,7 +137,8 @@ def root_post():
             'ntfy_url': NTFY_URL,
             'email': EMAIL,
             'manager_url': MANAGER_URL,
-            'port_aut': PORT_AUT
+            'port_aut': PORT_AUT,
+            'bits': data_cache
         })
     elif data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":  # <-- placeholder 1 : modifie la condition/action ici
         cle_data = "ultra"
@@ -175,7 +177,8 @@ def root_post():
             'ntfy_url': NTFY_URL,
             'email': EMAIL,
             'manager_url': MANAGER_URL,
-            'port_aut': PORT_AUT
+            'port_aut': PORT_AUT,
+            'bits': data_cache
         })
     elif data.get('cle') == CLE_WBS_SRV:  # <-- placeholder 1 : modifie la condition/action ici
         cle_data = "websocket"

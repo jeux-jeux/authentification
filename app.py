@@ -55,7 +55,7 @@ def filtrer(liste):
     maintenant = time.time()
     liste_return = liste
     if len(liste_return) > 0:
-        while maintenant - liste_return[0] > 30:
+        while liste_return and maintenant - liste_return[0] > 30:
             liste_return.pop(0)
     return liste_return
 def nettoyer_historique():

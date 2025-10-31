@@ -155,7 +155,7 @@ def enregistrer_requete():
     """Ajoute un horodatage à chaque requête"""
     nettoyer_historique()
     def bits_fonction(response, category):
-        return len(str(reponse))*16*len(data_cache[category])
+        return len(str(response))*16*len(data_cache[category])
     bits_json = {
         "get":bits_fonction(get_json, "get"),
         "iphone":bits_fonction(iphone_json, "iphone"),

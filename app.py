@@ -83,7 +83,7 @@ def root_get():
 
     if origin in allowedOrigins:
         cle_data = "get"
-        data_cache[cle_data] = data_cache[cle_data].append(time.time())
+        data_cache[cle_data].append(time.time())
         return jsonify({
             'url_message': MESSAGE_URL,
             'url': FIREBASE_URL,
@@ -102,7 +102,7 @@ def root_post():
 
     if data.get('cle') == CLE_IPHONE and CLE_IPHONE_LEVEL == "code":
         cle_data = "iphone"
-        data_cache[cle_data] = data_cache[cle_data].append(time.time())
+        data_cache[cle_data].append(time.time())
         return jsonify({
             'allowed_to_websocket': ALLOWED_TO_WEBSOCKET,
             'allowed_to_websocket_level': ALLOWED_TO_WEBSOCKET_LEVEL,
@@ -140,7 +140,7 @@ def root_post():
         })
     elif data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":  # <-- placeholder 1 : modifie la condition/action ici
         cle_data = "ultra"
-        data_cache[cle_data] = data_cache[cle_data].append(time.time())
+        data_cache[cle_data].append(time.time())
         return jsonify({
             'allowed_to_websocket': ALLOWED_TO_WEBSOCKET,
             'allowed_to_websocket_level': ALLOWED_TO_WEBSOCKET_LEVEL,
@@ -179,7 +179,7 @@ def root_post():
         })
     elif data.get('cle') == CLE_WBS_SRV:  # <-- placeholder 1 : modifie la condition/action ici
         cle_data = "websocket"
-        data_cache[cle_data] = data_cache[cle_data].append(time.time())
+        data_cache[cle_data].append(time.time())
         return jsonify({
             'allowed_origin': ALLOWED_TO_WEBSOCKET,
             'level': ALLOWED_TO_WEBSOCKET_LEVEL,
@@ -187,7 +187,7 @@ def root_post():
         })
     elif data.get('cle') == CLE_WBS_MNG:  # <-- placeholder 2 : modifie la condition/action ici
         cle_data = "manager"
-        data_cache[cle_data] = data_cache[cle_data].append(time.time())
+        data_cache[cle_data].append(time.time())
         return jsonify({
             'web_socket_server': CLOUDLINK_URL,
             'level': ALLOWED_TO_MANAGER_LEVEL,
@@ -196,7 +196,7 @@ def root_post():
         })
     elif data.get('cle') == CLE_INT_PROXY:  # <-- placeholder 3 : modifie la condition/action ici
         cle_data = "stockage"
-        data_cache[cle_data] = data_cache[cle_data].append(time.time())
+        data_cache[cle_data].append(time.time())
         return jsonify({
             'firebase_url': FIREBASE_URL_REAL,
             'origine_stockage': ALLOWED_TO_STOCKAGE,
@@ -205,7 +205,7 @@ def root_post():
         })
     elif data.get('cle') == CLE_MESSAGE:  # <-- placeholder 3 : modifie la condition/action ici
         cle_data = "message"
-        data_cache[cle_data] = data_cache[cle_data].append(time.time())
+        data_cache[cle_data].append(time.time())
         return jsonify({
             'allowed': ALLOWED_TO_MESSAGE,
             'level': ALLOWED_TO_MESSAGE_LEVEL,

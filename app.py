@@ -274,6 +274,14 @@ def cle_wbs():
         })
 
 
+@app.route("/wake", methods=["POST"])
+def wake():
+    data = request.get_json(force=True, silent=True) or {}
+    if not data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":
+        return jsonify({"status": "error", "message": "clé invalide"}), 403
+    return jsonify({"status": "ok"})
+
+
 # ✅ Route par défaut pour toutes les routes inconnues
 @app.errorhandler(404)
 def not_found(e):

@@ -7,6 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Definition des variables environnements
+AWAKE = os.environ.get('AWAKE')
 ALLOWED_TO_WEBSOCKET = os.environ.get('ALLOWED_TO_WEBSOCKET')
 ALLOWED_TO_WEBSOCKET_LEVEL = os.environ.get('ALLOWED_TO_WEBSOCKET_LEVEL')
 ALLOWED_TO_PRINCIPAL = os.environ.get('ALLOWED_TO_PRINCIPAL')
@@ -87,7 +88,8 @@ iphone_json = {
     'ntfy_url': NTFY_URL,
     'email': EMAIL,
     'manager_url': MANAGER_URL,
-    'port_aut': PORT_AUT
+    'port_aut': PORT_AUT,
+    'awake': AWAKE
 }
 
 ultra_json = iphone_json

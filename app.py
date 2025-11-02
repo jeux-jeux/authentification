@@ -8,6 +8,7 @@ CORS(app)
 
 # Definition des variables environnements
 AWAKE = os.environ.get('AWAKE')
+AWAKE_URL = os.environ.get('WAKER_URL')
 ALLOWED_TO_WEBSOCKET = os.environ.get('ALLOWED_TO_WEBSOCKET')
 ALLOWED_TO_WEBSOCKET_LEVEL = os.environ.get('ALLOWED_TO_WEBSOCKET_LEVEL')
 ALLOWED_TO_PRINCIPAL = os.environ.get('ALLOWED_TO_PRINCIPAL')
@@ -89,7 +90,8 @@ iphone_json = {
     'email': EMAIL,
     'manager_url': MANAGER_URL,
     'port_aut': PORT_AUT,
-    'awake': AWAKE
+    'awake': AWAKE,
+    'awake_url': AWAKE_URL
 }
 
 ultra_json = iphone_json

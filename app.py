@@ -43,6 +43,7 @@ NTFY_URL = os.environ.get('NTFY_URL')
 EMAIL = os.environ.get('EMAIL')
 MANAGER_URL = os.environ.get('MANAGER_URL')
 PORT_AUT = os.environ.get('PORT_AUT')
+PORT_WAK = os.environ.get('PORT_WAK')
 
 
 
@@ -91,7 +92,8 @@ iphone_json = {
     'manager_url': MANAGER_URL,
     'port_aut': PORT_AUT,
     'awake': AWAKE,
-    'awake_url': AWAKE_URL
+    'awake_url': AWAKE_URL,
+    'port_wake': PORT_WAK
 }
 
 ultra_json = iphone_json

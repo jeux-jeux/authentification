@@ -44,6 +44,7 @@ EMAIL = os.environ.get('EMAIL')
 MANAGER_URL = os.environ.get('MANAGER_URL')
 PORT_AUT = os.environ.get('PORT_AUT')
 PORT_WAK = os.environ.get('PORT_WAK')
+checker = os.environ.get("CHECKER")
 
 
 
@@ -182,7 +183,7 @@ def enregistrer_requete():
 # ✅ Route GET avec contrôle des origines
 @app.route('/', methods=['GET'])
 def root_get():
-    origin = request.headers.get('Origin')
+    origin = request.headers.get(checker)
     allowedOrigins = ALLOWED_TO_PRINCIPAL
     # Si aucune origine n'est fournie, on refuse tout de suite
     if not origin:

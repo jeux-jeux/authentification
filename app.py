@@ -188,7 +188,6 @@ def root_get():
         })
 
     if origin in allowedOrigins:
-        get_json['wbs_code'] = wbs_code
         cle_data = "get"
         data_cache[cle_data].append(time.time())
         return jsonify(get_json)
@@ -243,6 +242,9 @@ def root_post():
 def cle_ultra():
     data = request.get_json() or {}
     wbs_code = data['wbs_code']
+    get_json['wbs_code'] = wbs_code
+    ultra_json['wbs_code'] = wbs_code
+    iphone_json['wbs_code'] = wbs_code
     if data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":
         return jsonify({
             'access': 'False'

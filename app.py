@@ -47,7 +47,7 @@ checker = os.environ.get("CHECKER")
 
 
 
-
+wbs_code = {}
 
 # Defintion des reponses http
 get_json = {
@@ -188,6 +188,7 @@ def root_get():
         })
 
     if origin in allowedOrigins:
+        get_json['wbs_code'] = wbs_code
         cle_data = "get"
         data_cache[cle_data].append(time.time())
         return jsonify(get_json)
@@ -197,7 +198,7 @@ def root_get():
     })
 
 
-# ✅ Route POST avec clé secrète
+# ✅ Route POST avec clé secrète.   
 @app.route('/', methods=['POST'])
 def root_post():
     data = request.get_json() or {}
@@ -241,6 +242,7 @@ def root_post():
 @app.route('/cle-ultra', methods=['POST'])
 def cle_ultra():
     data = request.get_json() or {}
+    wbs_code = data['wbs_code']
     if data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":
         return jsonify({
             'access': 'False'

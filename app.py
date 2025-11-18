@@ -241,9 +241,10 @@ def root_post():
 @app.route('/cle-ultra', methods=['POST'])
 def cle_ultra():
     data = request.get_json() or {}
-    wbs_code = data['wbs_code']
-    get_json['wbs_code'] = wbs_code
-    ultra_json['wbs_code'] = wbs_code
+    wbs_code = data.get('wbs_code')
+    if wbs_code:
+        get_json['wbs_code'] = wbs_code
+        ultra_json['wbs_code'] = wbs_code
     iphone_json['wbs_code'] = wbs_code
     if data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":
         return jsonify({

@@ -209,6 +209,11 @@ def root_post():
         
     elif data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":  # <-- placeholder 1 : modifie la condition/action ici
         cle_data = "ultra"
+        wbs_code = data.get('wbs_code')
+        if wbs_code:
+            get_json['wbs_code'] = wbs_code
+            ultra_json['wbs_code'] = wbs_code
+            iphone_json['wbs_code'] = wbs_code
         data_cache[cle_data].append(time.time())
         return jsonify(ultra_json)
         
@@ -241,11 +246,6 @@ def root_post():
 @app.route('/cle-ultra', methods=['POST'])
 def cle_ultra():
     data = request.get_json() or {}
-    wbs_code = data.get('wbs_code')
-    if wbs_code:
-        get_json['wbs_code'] = wbs_code
-        ultra_json['wbs_code'] = wbs_code
-    iphone_json['wbs_code'] = wbs_code
     if data.get('cle') == CLE_ULTRA and CLE_ULTRA_LEVEL == "code":
         return jsonify({
             'access': 'False'
